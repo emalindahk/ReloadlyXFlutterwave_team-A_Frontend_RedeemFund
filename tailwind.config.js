@@ -3,7 +3,14 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#0A2342',
+      }
+    },
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif']
+    }
   },
   variants: {
     extend: {},
