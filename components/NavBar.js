@@ -4,14 +4,14 @@ import Link from 'next/link'
 
 function NavBar() {
 
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
 
     const handleClick = () => {
       setActive(!active);
     };
 
     return (
-       <header className="grid md:grid-cols-3 sticky z-50 shadow-md bg-primary text-white font-prestij p-6 md:items-center">
+       <header className="grid md:grid-cols-3 sticky z-50 shadow-md bg-primary text-white font-poppins p-6 md:items-center">
 
            <div className="flex items-center">
                <h1 className="text-2xl cursor-pointer">RedeemFund</h1>
@@ -38,8 +38,8 @@ function NavBar() {
         </button>
            
            <div className= {`${
-            active ? 'flex flex-col text-left space-y-2 mt-3' : 'hidden'
-          } md:flex-row md:items-center md:justify-between text-md md:mt-0 md:space-y-0`}>
+            active ? 'flex flex-col text-left space-y-2 mt-3 ' : 'hidden'
+          } md:flex md:flex-row md:items-center md:justify-between text-md md:mt-0 md:space-y-0`}>
               <Link href="/">Search</Link>
               <Link href="/">Discover</Link>
               <Link href="/">How It Works</Link>
@@ -47,11 +47,11 @@ function NavBar() {
            </div>
 
            <div className={`${ active ? 'flex flex-col space-y-2 w-40 mt-2'  : 'hidden'
-          }  md:flex-row md:items-center md:justify-end md:space-x-5 md:w-full md:space-y-0 md:mt-0`}>
+          }  md:flex md:flex-row md:items-center md:justify-end md:space-x-5 md:w-full md:space-y-0 md:mt-0`}>
               <Link href="/">Sign In</Link>
               <button className="bg-green-600 rounded-md p-2 text-sm hover:scale-105 transform transition duration-75 ease-out">
-                   Start a Campaign
-              </button>
+                   Start a campaign
+               </button>
            </div>
 
 
