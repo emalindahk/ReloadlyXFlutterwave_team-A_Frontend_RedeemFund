@@ -27,12 +27,12 @@ export default function Home() {
 
           <div className="px-8 md:pl-8 space-y-2 sm:order-2">
             <h2 className="text-5xl font-semibold text-center text-primary"> About Us</h2>
-            <p className="p-4 text-lg">Every one of us has a dream, personal dreams and dreams of a better world.
+            <p className="p-4 text-sm md:text-lg">Every one of us has a dream, personal dreams and dreams of a better world.
               That spark of inspiration to help a person, teach a person, fix a neighborhood, or even change a nation.
               At Redeemfunds, we empower individuals to chase their dreams and and donors to turn compassion into action.
               Because that is how dreams come true and change happens..</p>
 
-            <p className="p-4 text-lg">With Redeemfunds, we are creating a space where individuals can fund their dreams and
+            <p className="p-4 text-sm md:text-lg">With Redeemfunds, we are creating a space where individuals can fund their dreams and
               champion causes that matter and raise money to make a lasting difference.
               Through RedeemFunds, people have the tools they need to share their cause far and wide and harness the power of generosity.
               We are transforming the way people give and changing lives—are you ready to join us?
@@ -42,9 +42,9 @@ export default function Home() {
 
         <section>
           <h2 className="text-5xl font-semibold text-center text-primary">How it works</h2>
-          <h3 className="text-2xl text-center p-2 font-normal">Create a campaign for your cause in 3 easy steps</h3>
+          <h3 className="text-lg md:text-2xl text-center p-2 font-normal">Create a campaign for your cause in 3 easy steps</h3>
           <div className="bg-primary text-white py-8 mt-10 ">
-            <div className="grid md:grid-cols-3 mt-10 max-w-7xl mx-auto gap-40">
+            <div className="grid md:grid-cols-3 mt-10 max-w-7xl mx-auto gap-10 md:gap-40">
               <ProcessContainer
                 src="/create.png"
                 title="Create"
@@ -107,7 +107,7 @@ export default function Home() {
         </section>
 
         <section>
-          
+
         </section>
       </main>
     </div>
