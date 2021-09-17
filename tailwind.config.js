@@ -6,8 +6,13 @@ module.exports = {
     extend: {
       colors: {
         primary: '#0A2342',
-        grey: '#333333'
-      }
+        grey: '#333333',
+        greyLight: '#f3f4f6',
+        lightBlue: '#2C46CE'
+      },
+      backgroundImage: theme => ({
+        contact: "url('/contact.png')",
+       })
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif']
@@ -16,5 +21,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
