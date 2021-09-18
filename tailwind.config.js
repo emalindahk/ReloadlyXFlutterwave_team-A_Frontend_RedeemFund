@@ -8,7 +8,8 @@ module.exports = {
         primary: '#0A2342',
         grey: '#333333',
         greyLight: '#f3f4f6',
-        lightBlue: '#2C46CE'
+        lightBlue: '#2C46CE',
+        secondary: '#3EB4891A',
       },
       backgroundImage: theme => ({
         contact: "url('/contact.png')",
@@ -23,5 +24,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('tailwind-scrollbar-hide')
   ],
 }

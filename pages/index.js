@@ -4,9 +4,9 @@ import NavBar from '../components/NavBar'
 import Image from 'next/image'
 import ProcessContainer from '../components/ProcessContainer'
 import BenefitsContainer from '../components/BenefitsContainer'
-import Testimonials from '../components/Testimonials'
 import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
+import CarouselSlider from '../components/CarouselSlider'
 
 export default function Home() {
   return (
@@ -22,6 +22,8 @@ export default function Home() {
 
       <main className="font-poppins max-w-full">
 
+        {/* About Us Section */}
+
         <section className="grid px-4 py-14 sm:grid-cols-2 md:py-20 max-w-7xl mx-auto">
 
           <div className="relative order-2 mx-10 h-[300px] sm:h-[300px] md:h-[400px] lg:h-[500px] md:m-4 ">
@@ -32,7 +34,7 @@ export default function Home() {
             <h2 className="text-5xl font-semibold text-center text-primary"> About Us</h2>
             <p className="p-4 text-sm md:text-lg">Every one of us has a dream, personal dreams and dreams of a better world.
               That spark of inspiration to help a person, teach a person, fix a neighborhood, or even change a nation.
-              At Redeemfund, we empower individuals to chase their dreams and and donors to turn compassion into action.
+              At Redeemfund, we empower individuals to chase their dreams and donors to turn compassion into action.
               Because that is how dreams come true and change happens..</p>
 
             <p className="p-4 text-sm md:text-lg">With Redeemfund, we are creating a space where individuals can fund their dreams and
@@ -42,6 +44,8 @@ export default function Home() {
             </p>
           </div>
         </section>
+
+        {/* How It Works Section */}
 
         <section>
           <h2 className="text-5xl font-semibold text-center text-primary">How it works</h2>
@@ -69,6 +73,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Benefits Section */}
 
         <section className="max-w-7xl mx-auto py-10 mt-5 p-6">
           <div className="grid md:grid-cols-3 gap-14">
@@ -109,8 +115,24 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Partner Section */}
+        <section className="bg-secondary">
+           <div className="flex flex-col items-center py-16">
+             <h2 className="text-xl md:text-4xl text-primary font-semibold">Our Partners</h2>
+             <h3 className="text-gl md:text-xl">Unlimited access to a wide range of courses and skills</h3>
+             <div className="flex space-x-3 pt-16 flex-wrap items-center px-10 md:px-0"> 
+                  <div className="relative w-48 h-28"> <Image src="/udacity.png" layout="fill"/> </div>
+                  <div className="relative w-48 h-28"> <Image src="/udemy.png" layout="fill"/> </div>
+                  <div className="relative w-48 h-28"> <Image src="/coursera.png" layout="fill"/> </div>
+                  <div className="relative w-48 h-28"> <Image src="/skillshare.png" layout="fill"/> </div>
+             </div>
+           </div>
+        </section>
+
+
+        {/* Testimonial Section */}
         <section className="bg-greyLight">
-          <Testimonials />
+          <CarouselSlider/>
         </section>
 
         <section className="mt-10 md:mt-20 pb-10">
@@ -120,6 +142,8 @@ export default function Home() {
             duration-75 ease-out mt-4 text-white">Start a campaign</button>
           </div>
         </section>
+
+        {/* Contact Us Section */}
 
         <section className="hidden md:block bg-contact relative">
           <div className="absolute h-full w-full bg-black bg-opacity-70"></div>
@@ -140,6 +164,8 @@ export default function Home() {
 
           </div>
         </section>
+
+        {/* Footer Section */}
 
         <section className="bg-primary">
           <Footer/>
