@@ -1,20 +1,29 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/dist/client/router';
+import Image from 'next/image'
 
 
 function NavBar() {
 
+    const router = useRouter();
     const [active, setActive] = useState(false);
 
     const handleClick = () => {
       setActive(!active);
     };
 
+    const signUp = () => {
+      router.push({
+          pathname: '/signup',
+      })
+  }
+
     return (
        <header className="grid md:grid-cols-3 sticky z-50 shadow-md bg-primary text-white font-poppins p-6 md:items-center">
 
-           <div className="flex items-center">
-               <h1 className="text-2xl cursor-pointer">RedeemFund</h1>
+           <div className="relative w-44 h-6">
+              <Image src="/logo.png" layout="fill" />
            </div>
 
            <button
@@ -48,7 +57,7 @@ function NavBar() {
 
            <div className={`${ active ? 'flex flex-col space-y-2 w-40 mt-2'  : 'hidden'
           }  md:flex md:flex-row md:items-center md:justify-end md:space-x-5 md:w-full md:space-y-0 md:mt-0`}>
-              <Link href="/">Sign In</Link>
+              <Link href="/signup">Sign In</Link>
               <button className="bg-green-600 rounded-md p-2 text-sm hover:scale-105 transform transition duration-75 ease-out">
                    Start a campaign
                </button>

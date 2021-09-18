@@ -21,15 +21,15 @@ function Footer() {
               </div>
               <div className="flex flex-col md:px-8 text-left text-md space-y-2 font-light text-white">
                   <h1 className="text-green-600 font-normal text-lg mb-2">Learn More</h1>
-                  <Link href="/">How RedeemFunds work</Link>
+                  <Link href="/">How RedeemFund Works</Link>
                   <Link href="/">Success Stories</Link>
                   <Link href="/">FAQs</Link>
-                  <Link href="/">Supported countries</Link>
+                  <Link href="/">Supported Countries</Link>
               </div>
            </div>
 
            <div className="grid md:grid-cols-3 text-white mt-24 gap-8 md:gap-20">
-               <div className="order-2 md:order-1">2021 RedeemFunds</div>
+               <div className="order-2 md:order-1">2021 RedeemFund</div>
 
                <div className="order-3 grid md:grid-cols-3">
                <Link href="/">Terms</Link>
