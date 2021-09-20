@@ -1,14 +1,23 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/dist/client/router';
 
 function Footer() {
+
+    const router = useRouter();
+
+    const home = () => {
+        router.push({
+          pathname: '/',
+        })
+      }
     return (
-        <div className="flex flex-col bg-primary max-w-7xl mx-auto pt-16 pb-8 px-8">
+        <div className="flex flex-col bg-primary max-w-full mx-auto pt-16 pb-8 px-8">
            <div className="flex flex-col md:flex-row justify-between space-y-4">
               <div className="flex flex-col space-y-5">
 
-                  <div className="relative w-48 h-6">
+                  <div className="relative w-48 h-6 cursor-pointer" onClick={home}>
                       <Image src="/logo.png" layout="fill"/>
                   </div>
 
@@ -39,16 +48,24 @@ function Footer() {
 
                <div className="order-1 md:order-10 grid grid-cols-4 md:gap-x-14 justify-items-start w-48 md:w-full">
                  <Link href="/" className="relative">
+                     <a>
                      <Image src="/twitter.png" width="30" height="30" className="cursor-pointer"/>
+                     </a>
                  </Link>
                  <Link href="/" className="relative ">
+                 <a>
                      <Image src="/linkedin.png" width="30" height="30" className="cursor-pointer"/>
+                     </a>
                  </Link>
                  <Link href="/" className="relative">
+                 <a>
                      <Image src="/facebook.png" width="30" height="30" className="cursor-pointer"/>
+                     </a>
                  </Link>
                  <Link href="/" className="relative">
+                 <a>
                      <Image src="/instagram.png" width="30" height="30" className="cursor-pointer"/>
+                     </a>
                  </Link>
                </div>
 
