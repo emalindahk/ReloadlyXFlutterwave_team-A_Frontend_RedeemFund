@@ -16,11 +16,12 @@ function profile() {
         })
     } 
     const [session, loading] = useSession()
-    useEffect(() => {
-      if(!loading && !session?.accessToken) {
-        router.push('/signin')
-      }
-    }, [loading, session])
+    // useEffect(() => {
+    //   if(!loading && !session?.accessToken) {
+    //     router.push('/signin')
+    //   }
+    // }, [loading, session])
+    console.log(session)
 
 
     return (
@@ -38,11 +39,11 @@ function profile() {
 
                 <div className="max-w-full">
 
-                <form onSubmit={onSubmit} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6 text-grey">
+                <form onSubmit={signUp} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6 text-grey">
 
                 <label htmlFor="fname" >
                  <span className="font-semibold">Name</span>
-                <input id="fname" name="fname" type="text" value={name}
+                <input id="fname" name="fname" type="text" 
                   className="mt-1 px-4 py-3 block w-full rounded-md border-gray-400 shadow-sm focus:border-green-600 
             focus:ring focus:ring-green-600 focus:ring-opacity-50" />
               </label>

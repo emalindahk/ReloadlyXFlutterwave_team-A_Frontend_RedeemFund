@@ -2,47 +2,48 @@ import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import { useRouter } from 'next/dist/client/router';
-import { signIn, useSession } from 'next-auth/client'
 import Link from 'next/link'
 import Image from 'next/image'
+import { signIn } from 'next-auth/client'
 
 
-function signin() {
-    const [session] = useSession()
+function Signin() {
     const router = useRouter();
     const signUp = () => {
         router.push({
             pathname: '/signup',
         })
     } 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [loginError, setLoginError] = useState('')
 
-    useEffect(() => {
-      if (router.query.error) {
-        setLoginError(router.query.error)
-        setEmail(router.query.email)
+    const [errorMsg, setErrorMsg] = useState('')
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const body = {
+        email: e.currentTarget.email.value,
+        password: e.currentTarget.password.value,
+      };
+
+      const res = await fetch(`https://redeemfund-api.herokuapp.com/api/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.status === 200) {
+        const userObj = await res.json();
+        router.push("/profile");
+        // mutate(userObj);
+      } else {
+        setErrorMsg(await res.text());
       }
-    }, [router])
-
-    console.log('SESSION', session)
-
-    const onSubmit = (e) => {
-      e.preventDefault()
-      signIn('credentials',
-        {
-          email,
-          password,
-          callbackUrl: `${window.location.origin}/profile`,
-           redirect: false
-        }
-      )
-    }
+    };
 
     const fbSignin = (e) => {
       e.preventDefault()
-      signIn('facebook')
+      signIn('facebook'),
+      {
+        callbackUrl: `${window.location.origin}/profile`,
+      }
     }
 
   
@@ -55,8 +56,8 @@ function signin() {
           <h2 className="text-3xl text-center text-primary px-4 pt-6 pb-2">Sign in</h2>
 
           <hr />
-          {loginError ? <p style={{ color: "red" }} className="text-center">{loginError}</p> : null}
-          <form onSubmit={onSubmit} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6">
+          {errorMsg ? <p style={{ color: "red" }} className="text-center">{errorMsg}</p> : null}
+          <form onSubmit={handleSubmit} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6">
 
               <div className="flex flex-col p-4">
                   <button className="flex bg-fbBlue text-white py-3 items-center justify-center rounded-md"
@@ -81,8 +82,6 @@ function signin() {
                   id="email"
                   name="email"
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email address"
                   className="mt-1 px-4 py-3 block w-full rounded-md border-gray-400 shadow-sm focus:border-lightBlue 
             focus:ring focus:ring-lightBlue focus:ring-opacity-50"
@@ -94,8 +93,6 @@ function signin() {
                   id="password"
                   name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Create a password"
                   className="mt-1 px-4 py-3 block w-full rounded-md border-gray-400 shadow-sm focus:border-lightBlue 
             focus:ring focus:ring-lightBlue focus:ring-opacity-50"
@@ -122,4 +119,4 @@ function signin() {
     )
 }
 
-export default signin
+export default Signin

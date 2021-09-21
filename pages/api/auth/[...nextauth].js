@@ -1,19 +1,14 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 import axios from 'axios'
+import FacebookProvider from 'next-auth/providers/facebook'
 
 const providers = [
-
-  Providers.Facebook({
-    clientId: process.env.FACEBOOK_ID,
-    clientSecret: process.env.FACEBOOK_SECRET,
-  }),
-
   Providers.Credentials({
     name: 'Credentials',
     authorize: async (credentials) => {
       try {
-        const user = await axios.post(`${process.env.NEXT_BASE_API_URL}/login`,
+        const user = await axios.post(`https://redeemfund-api.herokuapp.com/api/login`,
         {
           user: {
             password: credentials.password,
@@ -37,25 +32,28 @@ const providers = [
       }
 
     }
+  }),
+  FacebookProvider({
+    clientId: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET
   })
-  
 ]
 
 const callbacks = {
-    jwt : async (token, user) => {
-      if (user) {
-        token.jwt = user.jwt;
-        token.user = user.user;
-        token.accessToken = user?.accessToken;
-      }
-      return Promise.resolve(token);
-    },
-    session : async (session, token) => {
-      session.jwt = token.jwt;
-      session.accessToken = token.accessToken ? token.accessToken :
-      session.user = token.user ? token.user : session.user; 
-      return Promise.resolve(session);
-    },
+  jwt: async (token, user) => {
+    if (user) {
+      token.jwt = user.jwt;
+      token.user = user.user;
+      token.accessToken = user?.accessToken;
+    }
+    return Promise.resolve(token);
+  },
+  session: async (session, token) => {
+    session.jwt = token.jwt;
+    session.accessToken = token.accessToken ? token.accessToken :
+    session.user = token.user ? token.user : session.user; 
+    return Promise.resolve(session);
+  },
 }
 
 const options = {

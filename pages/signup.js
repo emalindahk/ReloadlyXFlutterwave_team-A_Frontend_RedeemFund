@@ -21,7 +21,8 @@ const SignupPage = () => {
       lastName: e.currentTarget.lname.value,
       password: e.currentTarget.password.value,
     };
-    const res = await fetch(`${process.env.NEXT_BASE_API_URL}/register`, {
+    console.log(process.env.NEXTAUTH_URL)
+    const res = await fetch(`https://redeemfund-api.herokuapp.com/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
