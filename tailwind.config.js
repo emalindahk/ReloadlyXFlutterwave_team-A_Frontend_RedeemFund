@@ -10,6 +10,8 @@ module.exports = {
         greyLight: '#f3f4f6',
         lightBlue: '#2C46CE',
         secondary: '#3EB4891A',
+        fbBlue: '#4267B2',
+        greySec: '#8E8B8B'
       },
       backgroundImage: theme => ({
         contact: "url('/contact.png')",

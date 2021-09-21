@@ -167,9 +167,7 @@ export default function Home() {
 
         {/* Footer Section */}
 
-        <section className="bg-primary">
           <Footer/>
-        </section>
 
       </main>
     </div>
