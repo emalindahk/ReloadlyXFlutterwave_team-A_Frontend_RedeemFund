@@ -31,6 +31,8 @@ function Signin() {
       });
       if (res.status === 200) {
         const userObj = await res.json();
+        console.log('user object ',userObj)
+        localStorage.setItem("userId", userObj.userId);
         router.push("/profile");
         // mutate(userObj);
       } else {

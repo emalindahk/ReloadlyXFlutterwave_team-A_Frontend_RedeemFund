@@ -7,6 +7,7 @@ import BenefitsContainer from '../components/BenefitsContainer'
 import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import CarouselSlider from '../components/CarouselSlider'
+import CampaignCard from '../components/CampaignCard'
 
 export default function Home() {
   return (
@@ -21,6 +22,10 @@ export default function Home() {
       <Banner />
 
       <main className="font-poppins max-w-full">
+
+        <section className="p-10">
+          <CampaignCard/>
+        </section>
 
         {/* About Us Section */}
 

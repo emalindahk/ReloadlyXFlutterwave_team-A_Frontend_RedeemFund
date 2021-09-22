@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/dist/client/router';
 
-function Header({content, link, button}) {
+function Header({content, link, button, children}) {
     
     const router = useRouter();
 
@@ -33,6 +33,7 @@ function Header({content, link, button}) {
            <button className="text-green-600 text-sm hover:scale-105 transform transition duration-75 ease-out" onClick={link}>
                 {button}
             </button>
+            {children}
         </div>
 
 
