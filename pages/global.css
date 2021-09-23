@@ -1,7 +1,9 @@
 .MuiLinearProgress-root{
-    height: 1rem !important;
     background-color: #C4C4C4;
     border-left: 20% !important;
+}
+.h-3{
+    height: 1rem !important;
 }
 
 .MuiLinearProgress-bar{

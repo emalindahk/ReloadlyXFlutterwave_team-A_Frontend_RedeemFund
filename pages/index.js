@@ -8,8 +8,20 @@ import ContactForm from '../components/ContactForm'
 import Footer from '../components/Footer'
 import CarouselSlider from '../components/CarouselSlider'
 import CampaignCard from '../components/CampaignCard'
+import { useRouter } from 'next/dist/client/router';
 
 export default function Home() {
+
+  const router = useRouter();
+
+  const startCampaign = () => {
+    router.push({
+      pathname: '/campaign',
+    })
+  }
+  
+
+
   return (
     <div>
       <Head>
@@ -23,9 +35,9 @@ export default function Home() {
 
       <main className="font-poppins max-w-full">
 
-        <section className="p-10">
+        {/* <section className="p-10">
           <CampaignCard/>
-        </section>
+        </section> */}
 
         {/* About Us Section */}
 
@@ -74,7 +86,7 @@ export default function Home() {
             </div>
             <div className="flex justify-center py-8">
               <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
-            duration-75 ease-out mt-4">Start a campaign</button>
+            duration-75 ease-out mt-4" onClick={startCampaign}>Start a campaign</button>
             </div>
           </div>
         </section>
@@ -116,7 +128,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center py-8">
             <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
-            duration-75 ease-out mt-4 text-white">Start a campaign</button>
+            duration-75 ease-out mt-4 text-white" onClick={startCampaign}>Start a campaign</button>
           </div>
         </section>
 
@@ -144,7 +156,7 @@ export default function Home() {
           <h2 className="text-lg md:text-4xl text-center text-grey">Ready to fund your dreams?</h2>
           <div className="flex justify-center py-8">
             <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
-            duration-75 ease-out mt-4 text-white">Start a campaign</button>
+            duration-75 ease-out mt-4 text-white" onClick={startCampaign}>Start a campaign</button>
           </div>
         </section>
 

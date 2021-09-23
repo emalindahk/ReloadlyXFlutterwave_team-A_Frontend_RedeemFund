@@ -17,6 +17,7 @@ function Header({content, link, button, children}) {
           pathname: '/',
         })
       }
+    
   
     return (
         <header className="flex justify-between  sticky z-50 shadow-md bg-primary text-white font-poppins p-6 md:items-center">

@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import Layout from '../components/Layout'
-import Step1 from '../components/MultiStepForm/Step1'
-import Step2 from '../components/MultiStepForm/Step2'
-import Step3 from '../components/MultiStepForm/Step3'
-import Step4 from '../components/MultiStepForm/Step4'
+import { Step1, Step2, Step3, Step4 } from '../components/MultiStepForm/Steps'
+import FormLayout from '../components/MultiStepForm/FormLayout'
+import FormCompleted from '../components/MultiStepForm/FormCompleted'
 
 function campaign() {
+
+    const [formStep, setFormStep] = useState(0);
+
+  const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
+
+  const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
 
 
     return (
         <Layout >
             <Header content="Olubunmi Amaremo"/>
-          <Step4/>
+          <FormLayout currentStep={formStep} >
+              {formStep === 0 && <Step1 formStep={formStep} nextFormStep={nextFormStep}/>}
+              {formStep === 1 && <Step2 formStep={formStep} nextFormStep={nextFormStep} currentStep={formStep} prevFormStep={prevFormStep}/>}
+              {formStep === 2 && <Step3 formStep={formStep} nextFormStep={nextFormStep} currentStep={formStep} prevFormStep={prevFormStep}/>}
+              {formStep === 3 && <Step4 formStep={formStep} nextFormStep={nextFormStep} currentStep={formStep} prevFormStep={prevFormStep}/>}
+              {formStep > 3 && <FormCompleted/>}
+
+          </FormLayout>
         </Layout>
     )
 }
