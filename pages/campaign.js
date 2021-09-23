@@ -15,7 +15,7 @@ function campaign() {
 
 
     return (
-        <Layout >
+        <Layout title="Start a campaign">
             <Header content="Olubunmi Amaremo"/>
           <FormLayout currentStep={formStep} >
               {formStep === 0 && <Step1 formStep={formStep} nextFormStep={nextFormStep}/>}

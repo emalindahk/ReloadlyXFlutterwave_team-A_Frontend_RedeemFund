@@ -9,3 +9,11 @@
 .MuiLinearProgress-bar{
     background-color: #3EB489;
 }
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+    color: #359C4B;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+    color: #359C4B;
+}

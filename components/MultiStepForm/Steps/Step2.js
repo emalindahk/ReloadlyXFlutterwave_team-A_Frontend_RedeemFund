@@ -54,24 +54,22 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
                 <FileInput onChange={handleFileChange} />
                 {(imageUrl || campaignData.image) ? (
                     <div className="relative h-72">
-                        <Image src={imageUrl || campaignData.image } layout="fill" objectFit="cover" />
+                        <Image src={imageUrl || campaignData.image} layout="fill" objectFit="cover" />
                         <input type="hidden" name="image" value={imageUrl} onChange={setImgUrl} />
                         <div>
                         </div>
                     </div>
                 ) :
                     (
-                        <div className="flex bg-greyPrim items-center justify-center h-72 w-full">
-                            {console.log("image url set", imageUrl)}
-                            <div className="relative  h-[75px] w-[100px]">
-                                <Image src={imageUrl || "/img.png"} layout="fill" />
-                            </div>
+                        <div className="relative h-72 cursor-pointer"
+                            onClick={openFileDialog}>
+                            <Image src="/placeholder.png" layout="fill" />
                         </div>
                     )
                 }
                 <div className="w-full ">
-                    <button className="border-green-600 border-2 rounded-md p-2 text-md hover:scale-105 transform transition duration-75 ease-out
-             text-green-600 w-full"
+                    <button className="border-green-600 border-2 rounded-md p-2 text-md hover:scale-105 
+                    transform transition duration-75 ease-out text-green-600 w-full"
                         onClick={openFileDialog}>
                         Select a picture
                     </button>

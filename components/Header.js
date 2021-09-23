@@ -26,9 +26,6 @@ function Header({content, link, button, children}) {
            <Image src="/logo.png" layout="fill" />
         </div>
 
-        
-       
-
         <div className="flex flex-row items-center justify-end space-x-2 md:w-full md:space-y-0 md:mt-0">
            <p className="hidden sm:inline-flex font-light text-sm">{content}</p>
            <button className="text-green-600 text-sm hover:scale-105 transform transition duration-75 ease-out" onClick={link}>
