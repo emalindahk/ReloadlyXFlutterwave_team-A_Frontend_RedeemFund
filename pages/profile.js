@@ -9,7 +9,7 @@ import Link from "next/link";
 
 function profile() {
     const router = useRouter();
-
+    // let nnnn = localStorage.getItem('userId');
     const signUp = () => {
         router.push({
             pathname: '/signup',

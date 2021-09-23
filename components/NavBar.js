@@ -31,6 +31,12 @@ function NavBar() {
     })
   }
 
+  const startCampaign = () => {
+    router.push({
+      pathname: '/campaign',
+    })
+  }
+
     return (
        <header className="grid md:grid-cols-3 sticky z-50 shadow-md bg-primary text-white font-poppins p-6 md:items-center">
 
@@ -71,7 +77,7 @@ function NavBar() {
           }  md:flex md:flex-row md:items-center md:justify-end md:space-x-5 md:w-full md:space-y-0 md:mt-0`}>
               <Link href="/signin">Sign In</Link>
               <button className="bg-green-600 rounded-md p-2 text-sm hover:scale-105 transform transition duration-75 ease-out"
-              onClick={signUp}>
+              onClick={startCampaign}>
                    Start a campaign
                </button>
            </div>

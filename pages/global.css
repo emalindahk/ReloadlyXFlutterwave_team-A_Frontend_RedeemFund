@@ -1,0 +1,19 @@
+.MuiLinearProgress-root{
+    background-color: #C4C4C4;
+    border-left: 20% !important;
+}
+.h-3{
+    height: 1rem !important;
+}
+
+.MuiLinearProgress-bar{
+    background-color: #3EB489;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+    color: #359C4B;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+    color: #359C4B;
+}
