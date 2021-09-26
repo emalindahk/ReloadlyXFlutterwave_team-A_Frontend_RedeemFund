@@ -19,6 +19,7 @@ function campaign() {
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
 
+
   useEffect(() => {
     if (!loading && !session?.accessToken) {
       router.push('/signin')
@@ -26,6 +27,7 @@ function campaign() {
   }, [loading, session])
 
   if (!session) {
+    
     return (
         <div className="flex items-center justify-center">You need to be signed in.</div>
     )

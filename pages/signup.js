@@ -7,17 +7,17 @@ const SignupPage = () => {
 
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
-  const handleSubmit = async (e) => {
 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = {
+  const body = {
       email: e.currentTarget.email.value,
       firstName: e.currentTarget.fname.value,
       lastName: e.currentTarget.lname.value,
       password: e.currentTarget.password.value,
     };
 
-    const res = await fetch(`https://redeemfund-api.herokuapp.com/api/register`, {
+  const res = await fetch(`https://redeemfund-api.herokuapp.com/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -28,11 +28,12 @@ const SignupPage = () => {
       setErrorMsg(await res.text());
     }
   };
-    const signIn = () => {
-        router.push({
-            pathname: '/signin',
+
+  const signIn = () => {
+      router.push({
+          pathname: '/signin',
         })
-    } 
+      } 
 
   return (
     <Layout title="SignUp">

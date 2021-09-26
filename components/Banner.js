@@ -88,7 +88,7 @@ function Banner() {
            </div>
           
         </div>
-        <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] font-poppins">
+        <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] 2xl:h-[700px] w-full font-poppins">
            <Image src="/banner3.png"
            layout="fill"
            objectFit="cover"

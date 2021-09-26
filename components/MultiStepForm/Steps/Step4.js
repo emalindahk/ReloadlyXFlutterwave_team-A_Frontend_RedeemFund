@@ -1,33 +1,53 @@
-import React, {useContext} from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import LinearProgress from '@mui/material/LinearProgress';
 import { FormContext, useFormData } from '../../../context/index';
+import FormCompleted from '../FormCompleted';
+import { useUser } from '../../../lib/hooks';
 
-function Step4({ formStep, nextFormStep, currentStep, prevFormStep}) {
+function Step4({ formStep, nextFormStep, currentStep, prevFormStep }) {
 
-    const { setFormValues} = useFormData();
+    const { user } = useUser()
+    const firstName = user && user.firstName ? user.firstName : '';
+    const lastName = user && user.lastName ? user.lastName : '';
     const context = useContext(FormContext);
+    const { campaignData, setCampaignData } = useContext(FormContext)
+
+    const [open, setOpen] = useState(false)
+
+    const usePrevious = (value) => {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+
+    const prevOpen = usePrevious(open)
+    const handleComplete = _ => {
+        setOpen(!prevOpen)
+        console.log("open +++++", open)
+    }
+
+    const handleSubmit = () => {
+        handleComplete()
+    };
     const campaign = context.category
     console.log(campaign)
-
-
-    const handleSubmit = (values) => {
-        setFormValues(values);
-        nextFormStep();
-    };
-
-    const {campaignData, setCampaignData} = useContext(FormContext)
     console.log(campaignData)
+
+
 
     return (
         <div className={`${formStep === 3 ? " w-full md:px-5 lg:px-40 pt-8" : "hidden"}`}>
             <div className="flex flex-col items-center space-y-10 md:space-y-16">
                 <h1 className="text-2xl font-semibold">Campaign preview</h1>
-                <form action="post" onSubmit={handleSubmit} className="w-full flex flex-col">
+                <FormCompleted openModal={open} setOpen={handleComplete} />
+                <form onSubmit={(e) => handleSubmit(e)} className="w-full flex flex-col">
                     <div className="flex flex-col md:flex-row justify-between w-full space-y-10 space-x-10">
                         <div className="flex flex-col space-y-5">
                             <div className="relative h-[200px] md:h-[320px] md:w-[520px]">
-                                <Image src={campaignData.image ||"/cover.png"} layout="fill" objectFit="cover" objectPosition="center"/>
+                                <Image src={campaignData.image || "/cover.png"} layout="fill" objectFit="cover" objectPosition="center" />
                             </div>
 
                             <div className="flex flex-row space-x-8 pt-4">
@@ -36,7 +56,7 @@ function Step4({ formStep, nextFormStep, currentStep, prevFormStep}) {
                                 </div>
                                 <div className="flex space-x-3">
                                     <span>🇳🇬</span>
-                                    <p className="text-sm">Olubunmi Amaremo</p>
+                                    <p className="text-sm">{`${firstName} ${lastName}`}</p>
                                 </div>
                             </div>
 

@@ -44,7 +44,6 @@ function Signin({ csrfToken }) {
   }, [router]);
 
   const fbSignin = (e) => {
-    console.log('fb signin')
     e.preventDefault()
     signIn('facebook'),
     {
