@@ -5,34 +5,33 @@ import FacebookProvider from 'next-auth/providers/facebook'
 
 const providers = [
   Providers.Credentials({
-    name: 'Credentials',
-    authorize: async (credentials) => {
+
+    async authorize(credentials) {
       try {
         const user = await axios.post(`https://redeemfund-api.herokuapp.com/api/login`,
-        {
-          user: {
+          {
             password: credentials.password,
             email: credentials.email
-          }
-        },
-        {
-          headers: {
-            accept: '*/*',
-            'Content-Type': 'application/json'
-          }
-        })
+          },
+          {
+            headers: {
+              method: "POST",
+              headers: { "Content-Type": "application/json", 
+              accept: '*/*',
+               "Access-Control-Allow-Origin": "*"},
+              body: JSON.stringify(credentials),
+            }
+          })
 
         if (user) {
-          return {status: 'success', data: user.data.user}
-        } 
+          return user.data
+        }
       } catch (e) {
-        const errorMessage = e.response.data.message
-        // Redirecting to the login page with error messsage in the URL
-        throw new Error(errorMessage + '&email=' + credentials.email)
+        console.log("Login errror", e)
       }
-
     }
   }),
+
   FacebookProvider({
     clientId: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET
@@ -45,22 +44,30 @@ const callbacks = {
       token.jwt = user.jwt;
       token.user = user.user;
       token.accessToken = user?.accessToken;
+      token.id = user?.id;
     }
-    return Promise.resolve(token);
+    return token;
   },
   session: async (session, token) => {
     session.jwt = token.jwt;
     session.accessToken = token.accessToken ? token.accessToken :
     session.user = token.user ? token.user : session.user; 
-    return Promise.resolve(session);
-  },
+    session.id = token.id ? token.id : session.id;
+    return session;
+  }
 }
 
 const options = {
   providers,
+  secret: process.env.JWT_SECRET,
+  session: {
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60 // 30 days
+  },
   callbacks,
   pages: {
-    error: '/login' // Changing the error redirect page to our custom login page
+    signIn: '/signin',
+    error: '/signin' // Changing the error redirect page to our custom login page
   }
 }
 

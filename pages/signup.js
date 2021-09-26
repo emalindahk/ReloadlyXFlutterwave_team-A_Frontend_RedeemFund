@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import { useRouter } from 'next/dist/client/router';
-import { useUser } from "../lib/hooks"
 
 const SignupPage = () => {
-    const [user, { mutate }] = useUser();
+
   const [errorMsg, setErrorMsg] = useState("");
-
-  // call whenever user changes (ex. right after signing up successfully)
-    useEffect(() => {
-      if (user) router.replace("/");
-    }, [user]);
-
+   const router = useRouter();
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const body = {
       email: e.currentTarget.email.value,
@@ -21,23 +16,18 @@ const SignupPage = () => {
       lastName: e.currentTarget.lname.value,
       password: e.currentTarget.password.value,
     };
-    console.log(process.env.NEXTAUTH_URL)
+
     const res = await fetch(`https://redeemfund-api.herokuapp.com/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
     if (res.status === 200) {
-      const userObj = await res.json();
       router.push("/profile");
-      mutate(userObj);
     } else {
       setErrorMsg(await res.text());
     }
   };
-
-  const router = useRouter();
-
     const signIn = () => {
         router.push({
             pathname: '/signin',

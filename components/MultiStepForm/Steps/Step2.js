@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useS3Upload } from 'next-s3-upload';
-import { useFormData, FormContext } from '../../../context/index';
+import { FormContext } from '../../../context/index';
 
 function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
 
@@ -30,17 +30,10 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
         setCampaignData({ ...campaignData, image: e.target.value });
     }
 
-    const handleSubmit = (values) => {
+    const handleSubmit = () => {
         setImgUrl
         nextFormStep();
     };
-
-
-
-    console.log(campaignData)
-    console.log(imageUrl)
-
-
 
     return (
         <div className={`${formStep === 1 ? "flex flex-col justify-center items-center space-y-5 md:p-10 md:max-w-xl mx-auto" : "hidden"}`}>
