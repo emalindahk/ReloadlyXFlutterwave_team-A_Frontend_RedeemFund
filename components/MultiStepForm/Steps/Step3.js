@@ -1,12 +1,10 @@
 import React, { useContext } from 'react'
 import Image from 'next/image'
 import Modal from '../Modal';
-import { useFormData, FormContext } from '../../../context/index';
+import { FormContext } from '../../../context/index';
 
 
 function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
-
-    const { setFormValues } = useFormData();
 
     const handleSubmit = (values) => {
         nextFormStep();
@@ -42,9 +40,9 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
                     <div className="w-full space-y-2">
                         <label htmlFor="" className="flex flex-col space-y-2 w-full">
                             <span className="font-semibold">Title</span>
-                            <input type="text" className="mt-1 px-4 py-3 block w-full rounded-md border-greyPrim shadow-sm focus:border-lightBlue 
-            focus:ring focus:ring-lightBlue focus:ring-opacity-50" placeholder="Subject"
-                                value={campaignData['subject']}
+                            <input type="text" className="mt-1 px-4 py-3 block w-full rounded-md border-greyPrim shadow-sm focus:border-green-600 
+                            focus:ring focus:ring-green-600 focus:ring-opacity-50" placeholder="Subject"
+                                value={campaignData['subject'] || ''}
                                 onChange={setSubject}
                                 required />
                         </label>
@@ -65,12 +63,12 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
                                     </div>
                                 </div>
 
-                                <textarea className="mt-1 px-4 py-3 block w-full border-t-2 border-greyPrim shadow-sm focus:border-lightBlue 
-            focus:ring focus:ring-lightBlue focus:ring-opacity-50"
+                                <textarea className="mt-1 px-4 py-3 block w-full border-t-2 border-greyPrim shadow-sm 
+                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50"
                                     cols="20"
                                     rows="8"
                                     placeholder="Enter your message"
-                                    value={campaignData['body']}
+                                    value={campaignData['body'] || ''}
                                     onChange={setBody}
                                     required></textarea>
                             </div>
@@ -78,14 +76,14 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
                     </div>
 
                     <button className="bg-green-600 p-2 rounded-md text-md hover:scale-105 transform transition duration-75 ease-out
-             text-white w-full" type="submit">
+                    text-white w-full" type="submit">
                         Confirm
                     </button>
                     {currentStep < 4 && (
                         <>
                             {currentStep > 0 && (
                                 <button className="border-green-600 p-2 text-md hover:scale-105 transform transition duration-75 ease-out
-                           text-grey"
+                                text-grey"
                                     onClick={prevFormStep}>
                                     Back
                                 </button>

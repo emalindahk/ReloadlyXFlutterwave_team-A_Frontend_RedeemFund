@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/dist/client/router';
+import { useUser } from '../lib/hooks';
 
 function Header({content, link, button, children}) {
     
     const router = useRouter();
+    const { user } = useUser()
+    const firstName = user && user.firstName ? user.firstName : '';
+    const lastName = user && user.lastName ? user.lastName : '';
 
     const signIn = () => {
         router.push({
@@ -17,6 +21,8 @@ function Header({content, link, button, children}) {
           pathname: '/',
         })
       }
+
+     
     
   
     return (

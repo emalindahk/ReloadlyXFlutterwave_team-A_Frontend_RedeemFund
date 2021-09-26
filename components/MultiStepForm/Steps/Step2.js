@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useS3Upload } from 'next-s3-upload';
-import { useFormData, FormContext } from '../../../context/index';
+import { FormContext } from '../../../context/index';
 
 function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
 
     const { submitData, campaignData, setCampaignData } = useContext(FormContext);
     let [imageUrl, setImageUrl] = useState();
+    let [isUploaded, setImageUploaded] = useState(false)
     let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
 
     useEffect(() => {
@@ -24,23 +25,16 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
         }
         let { url } = await uploadToS3(file);
         setImageUrl(url);
+        setImageUploaded(true);
     };
 
-    const setImgUrl = (e) => {
-        setCampaignData({ ...campaignData, image: e.target.value });
+    const setImgUrl = () => {
+        setCampaignData({ ...campaignData, image: imageUrl });
     }
 
-    const handleSubmit = (values) => {
-        setImgUrl
-        nextFormStep();
+    const handleSubmit = () => {
+        isUploaded && (setImgUrl, nextFormStep())
     };
-
-
-
-    console.log(campaignData)
-    console.log(imageUrl)
-
-
 
     return (
         <div className={`${formStep === 1 ? "flex flex-col justify-center items-center space-y-5 md:p-10 md:max-w-xl mx-auto" : "hidden"}`}>
@@ -55,7 +49,7 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
                 {(imageUrl || campaignData.image) ? (
                     <div className="relative h-72">
                         <Image src={imageUrl || campaignData.image} layout="fill" objectFit="cover" />
-                        <input type="hidden" name="image" value={imageUrl} onChange={setImgUrl} />
+                        <input type="hidden" name="image" value={imageUrl} onChange={setImageUrl} />
                         <div>
                         </div>
                     </div>

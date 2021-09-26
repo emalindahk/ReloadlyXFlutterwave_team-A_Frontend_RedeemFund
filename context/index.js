@@ -6,6 +6,7 @@ export default function FormProvider({ children }) {
   const [data, setData] = useState({});
   const [campaignData, setCampaignData] = useState([]);
   const [finalData, setFinalData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   function submitData(){
     setFinalData(finalData =>[...finalData, campaignData]);
@@ -20,7 +21,8 @@ export default function FormProvider({ children }) {
   };
 
   return (
-    <FormContext.Provider value={{ data, setFormValues, campaignData, setCampaignData, finalData, setFinalData, submitData }}>
+    <FormContext.Provider value={{ data, setFormValues, campaignData, setCampaignData, finalData, setFinalData, submitData,
+    userData, setUserData }}>
       {children}
     </FormContext.Provider>
   );
