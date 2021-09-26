@@ -6,7 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 const SignupPage = () => {
 
   const [errorMsg, setErrorMsg] = useState("");
-   const router = useRouter();
+  const router = useRouter();
   const handleSubmit = async (e) => {
 
     e.preventDefault();

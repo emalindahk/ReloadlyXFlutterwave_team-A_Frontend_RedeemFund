@@ -118,7 +118,7 @@ function Signin({ csrfToken }) {
           <hr />
 
           <div className="relative flex items-center md:w-[550px] pt-6 pb-8 justify-center">
-            <Link href="/"><p className="text-green-600 text-sm underline">Forgot Your Password?</p>
+            <Link href="/forgot-password"><p className="text-green-600 text-sm underline cursor-pointer">Forgot Your Password?</p>
             </Link>
           </div>
 
