@@ -8,7 +8,7 @@ const providers = [
 
     async authorize(credentials) {
       try {
-        const user = await axios.post(`https://redeemfund-api.herokuapp.com/api/login`,
+        const user = await axios.post(`${process.env.NEXT_BASE_API_URL}login`,
           {
             password: credentials.password,
             email: credentials.email

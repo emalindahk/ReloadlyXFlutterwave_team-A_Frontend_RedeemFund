@@ -15,6 +15,7 @@ function NavBar() {
   const { user } = useUser()
   const firstName = user && user.firstName ? user.firstName : '';
   const lastName = user && user.lastName ? user.lastName : '';
+  const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
 
   const handleClick = () => {
     setActive(!active);
@@ -126,8 +127,15 @@ function NavBar() {
           Start a campaign
         </button>
         <div className="relative flex flex-row items-center space-x-3">
-        <PersonIcon />
-        <p className="cursor-pointer" onClick="/profile">{`${firstName} ${lastName}`}</p>
+          {(profPic)? (
+            <div className="relative h-8 w-8">
+            <Image src={profPic} layout="fill" className="rounded-full" />
+            </div>
+          ):(
+            <PersonIcon className="w-8 h-8" />
+          )}
+        
+        <p className="cursor-pointer" onClick={profile}>{`${firstName} ${lastName}`}</p>
         </div>
         
       </div>

@@ -20,6 +20,9 @@ function profile() {
   const { user} = useUser()
   const firstName = user && user.firstName ? user.firstName : '';
   const lastName = user && user.lastName ? user.lastName : '';
+  const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
+  const phoneNo = user && user.phoneNumber ? user.phoneNumber : '';
+  const country = user && user.countryName ? user.countryName : '';
   const [mobileNo, setMobileNo] = useState();
   const [countryName, setCountryName] = useState();
   const [countryId, setCountryId] = useState();
@@ -88,7 +91,7 @@ function profile() {
       };
       
     
-    const res = await fetch(`https://redeemfund-api.herokuapp.com/api/beneficiary`, {
+    const res = await fetch(`${process.env.NEXT_BASE_API_URL}beneficiary`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", 
         "Authorization": `Bearer ${session && session.accessToken}` },
@@ -101,6 +104,8 @@ function profile() {
         setErrorMsg(await res.text());
       }
     };
+
+    console.log('user info', user)
 
   return (
     <Layout title="Setup Profile">
@@ -118,9 +123,9 @@ function profile() {
             <div className="flex items-center justify-center">
 
               <FileInput onChange={handleFileChange} />
-              {(imageUrl || userData.image) ? (
+              {(imageUrl || profPic) ? (
                 <div className="relative flex h-24 w-24">
-                  <Image src={imageUrl || userData.image} layout="fill" objectFit="cover" className="rounded-full" />
+                  <Image src={imageUrl || profPic} layout="fill" objectFit="cover" className="rounded-full" />
                   <input type="hidden" name="image" value={imageUrl} onChange={setProfImage} />
                 </div>
               ) : (
@@ -143,7 +148,8 @@ function profile() {
               <CountrySelect
                 options={countries}
                 title="Kenya"
-                value={countryId}
+                value={countryId || country}
+                disabled={country ? true : false}
                 handleSelectChange={handleCountryChange}
               />
             </label>
@@ -157,7 +163,8 @@ function profile() {
                 placeholder="Enter mobile number with country code"
                 className="mt-1 px-4 py-3 block w-full rounded-md border-gray-400 shadow-sm focus:border-green-600 
             focus:ring focus:ring-green-600 focus:ring-opacity-50" 
-            value={mobileNo || '' }
+            value={mobileNo || phoneNo }
+            disabled={phoneNo ? true : false}
             onChange={handleMobileNoChange}/>
             </label>
 
@@ -178,7 +185,8 @@ export default profile
 export async function getServerSideProps(context) {
   return {
     props: {
-      session: await getSession(context)
+      session: await getSession(context),
     },
   }
 }
+
