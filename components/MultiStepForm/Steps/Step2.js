@@ -28,8 +28,8 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
         setImageUploaded(true);
     };
 
-    const setImgUrl = () => {
-        setCampaignData({ ...campaignData, image: imageUrl });
+    const setImgUrl = (e) => {
+        setCampaignData({ ...campaignData, image: e.target.value });
     }
 
     const handleSubmit = () => {

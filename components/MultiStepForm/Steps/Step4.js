@@ -1,17 +1,19 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import LinearProgress from '@mui/material/LinearProgress';
-import { FormContext, useFormData } from '../../../context/index';
+import { FormContext } from '../../../context/index';
 import FormCompleted from '../FormCompleted';
 import { useUser } from '../../../lib/hooks';
+import { useRouter } from 'next/dist/client/router'
 
-function Step4({ formStep, nextFormStep, currentStep, prevFormStep }) {
+function Step4({ formStep,  currentStep, prevFormStep }) {
 
     const { user } = useUser()
+    const router = useRouter()
     const firstName = user && user.firstName ? user.firstName : '';
     const lastName = user && user.lastName ? user.lastName : '';
-    const context = useContext(FormContext);
-    const { campaignData, setCampaignData } = useContext(FormContext)
+    const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
+    const { campaignData } = useContext(FormContext)
 
     const [open, setOpen] = useState(false)
 
@@ -28,13 +30,9 @@ function Step4({ formStep, nextFormStep, currentStep, prevFormStep }) {
         setOpen(!prevOpen)
         console.log("open +++++", open)
     }
-
     const handleSubmit = () => {
         handleComplete()
     };
-    const campaign = context.category
-    console.log(campaign)
-    console.log(campaignData)
 
 
 
@@ -47,13 +45,17 @@ function Step4({ formStep, nextFormStep, currentStep, prevFormStep }) {
                     <div className="flex flex-col md:flex-row justify-between w-full space-y-10 space-x-10">
                         <div className="flex flex-col space-y-5">
                             <div className="relative h-[200px] md:h-[320px] md:w-[520px]">
-                                <Image src={campaignData.image || "/cover.png"} layout="fill" objectFit="cover" objectPosition="center" />
+                                <Image src={campaignData.image} layout="fill" objectFit="cover" objectPosition="center" />
                             </div>
 
                             <div className="flex flex-row space-x-8 pt-4">
-                                <div className="relative h-16 w-16">
-                                    <Image src="/profile.png" layout="fill" />
-                                </div>
+                                {(profPic) ? (
+                                    <div className="relative h-16 w-16">
+                                        <Image src={profPic} layout="fill" className="rounded-full" />
+                                    </div>
+                                ) : (
+                                    <PersonIcon className="w-8 h-8 text-black" />
+                                )}
                                 <div className="flex space-x-3">
                                     <span>🇳🇬</span>
                                     <p className="text-sm">{`${firstName} ${lastName}`}</p>
@@ -91,7 +93,7 @@ function Step4({ formStep, nextFormStep, currentStep, prevFormStep }) {
                             </>
                         )}
                         <button className="bg-green-600 p-2 rounded-md text-md hover:scale-105 transform transition duration-75 ease-out
-             text-white w-full md:order-2">
+                         text-white w-full md:order-2">
                             Complete
                         </button>
 

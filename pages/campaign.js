@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
+
+import { useSession, getSession } from "next-auth/client";
+import { useUser } from '../lib/hooks';
+import { useRouter } from 'next/dist/client/router';
+import PersonIcon from '@mui/icons-material/Person';
+import Image from 'next/image'
+
 import Header from '../components/Header'
 import Layout from '../components/Layout'
 import { Step1, Step2, Step3, Step4 } from '../components/MultiStepForm/Steps'
 import FormLayout from '../components/MultiStepForm/FormLayout'
 import FormCompleted from '../components/MultiStepForm/FormCompleted'
-import { useSession, getSession } from "next-auth/client";
-import { useUser } from '../lib/hooks';
-import { useRouter } from 'next/dist/client/router';
 
 function campaign() {
 
@@ -16,9 +20,14 @@ function campaign() {
   const { user } = useUser()
   const firstName = user && user.firstName ? user.firstName : '';
   const lastName = user && user.lastName ? user.lastName : '';
+  const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
   const nextFormStep = () => setFormStep((currentStep) => currentStep + 1);
   const prevFormStep = () => setFormStep((currentStep) => currentStep - 1);
 
+  const profile = () => {
+    router.push({
+        pathname: '/profile',
+    })}
 
   useEffect(() => {
     if (!loading && !session?.accessToken) {
@@ -34,7 +43,19 @@ function campaign() {
   }
   return (
         <Layout title="Start a campaign">
-            <Header content={`${firstName} ${lastName}`}/>
+            <Header>
+            <div className="relative flex flex-row items-center space-x-3">
+          {(profPic)? (
+            <div className="relative h-8 w-8">
+            <Image src={profPic} layout="fill" className="rounded-full" />
+            </div>
+          ):(
+            <PersonIcon className="w-8 h-8" />
+          )}
+        
+        <p className="cursor-pointer" onClick={profile}>{`${firstName} ${lastName}`}</p>
+        </div>
+            </Header>
           <FormLayout currentStep={formStep} >
               {formStep === 0 && <Step1 formStep={formStep} nextFormStep={nextFormStep}/>}
               {formStep === 1 && <Step2 formStep={formStep} nextFormStep={nextFormStep} currentStep={formStep} prevFormStep={prevFormStep}/>}
