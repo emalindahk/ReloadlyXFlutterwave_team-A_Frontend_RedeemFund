@@ -86,7 +86,7 @@ const SignupPage = () => {
                 />
               </label>
               <button type="submit"
-                className="bg-green-600 rounded-md py-2 px-5 text-md hover:scale-105 transform transition duration-75 ease-out text-white">
+                className="bg-green-600 rounded-md py-2 px-5 text-base hover:scale-105 transform transition duration-75 ease-out text-white">
                 Next</button>
             </div>
           </form>

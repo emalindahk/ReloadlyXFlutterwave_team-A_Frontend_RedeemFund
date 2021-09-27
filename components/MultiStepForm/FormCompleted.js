@@ -2,11 +2,14 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { useRouter } from 'next/dist/client/router'
 
 export default function FormCompleted({openModal, setOpen}) {
-    const open = openModal && openModal
-    console.log("open ----", open)
+    const router = useRouter()
     const cancelButtonRef = useRef(null)
+    const share = () => {
+        router.push('/share/tips')
+    }
 
     return (
         <Transition.Root show={openModal} as={Fragment}>

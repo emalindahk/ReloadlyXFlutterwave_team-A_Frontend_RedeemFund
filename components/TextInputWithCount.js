@@ -47,7 +47,7 @@ function TextInputWithCount() {
         <div className={`w-72 ${state.errorLimit ? 'text-red-700' : ''}`}>
         <input type="text" value={state.inputValue} onChange={handleChange} placeholder="write some thing here.."/>
         <div className="w-full">
-          <span className="relative block text-right text-md mt-3 text-black">{state.lettersCount}/{state.countLimit}</span>  
+          <span className="relative block text-right text-base mt-3 text-black">{state.lettersCount}/{state.countLimit}</span>  
         </div>
       </div> 
     )

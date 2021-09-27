@@ -3,7 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import { useUser } from "../lib/hooks";
 import { useS3Upload } from 'next-s3-upload';
 import { FormContext } from '../context/index'
-import { useSession, getSession } from "next-auth/client";
+import { useSession, getSession, signOut } from "next-auth/client";
 import Image from 'next/image';
 import Header from "../components/Header";
 import Layout from "../components/Layout";
@@ -89,7 +89,6 @@ function profile() {
       profilePhotoS3: imageUrl,
       phoneNumber: mobileNo,
       };
-      
     
     const res = await fetch(`${process.env.NEXT_BASE_API_URL}beneficiary`, {
         method: "PATCH",
@@ -105,7 +104,8 @@ function profile() {
       }
     };
 
-    console.log('user info', user)
+
+
 
   return (
     <Layout title="Setup Profile">
@@ -173,8 +173,15 @@ function profile() {
               transform transition duration-75 ease-out text-white">
               Save
             </button>
+           
           </form>
         </div>
+        <button type="submit"
+              className="bg-white rounded-md p-3 mt-3 hover:scale-105 
+              transform transition duration-75 ease-out text-green-600 text-lg font-semibold"
+              onClick={() => signOut({callbackUrl: '/'})}>
+              Sign Out
+            </button>
       </div>
     </Layout>
   )

@@ -12,7 +12,11 @@ module.exports = {
         secondary: '#3EB4891A',
         fbBlue: '#4267B2',
         greySec: '#8E8B8B',
-        greyPrim: '#c4c4c4'
+        greyPrim: '#c4c4c4',
+        whatsapp: '#075E54',
+        messenger: '#4267B2',
+        twitter: '#1DA1F2',
+        facebook: '#1DA1F2'
       },
       backgroundImage: theme => ({
         contact: "url('/contact.png')",

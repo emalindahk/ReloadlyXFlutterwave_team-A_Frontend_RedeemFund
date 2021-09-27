@@ -10,7 +10,7 @@ function BenefitsContainer({src, title, content}) {
 
             <div className="flex flex-col px-4 space-y-3">
                  <h3 className="text-lg pt-5 md:pt-0 font-semibold">{title}</h3>
-                 <p className="hidden md:flex md:text-md ">{content}</p>
+                 <p className="hidden md:flex md:text-base ">{content}</p>
             </div>
             
         </div>

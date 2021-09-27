@@ -30,7 +30,7 @@ function Footer() {
               </div>
 
               <div className="flex flex-col md:flex-row">
-              <div className="flex flex-col md:px-8 text-left text-md space-y-2 font-light text-white justify-end">
+              <div className="flex flex-col md:px-8 text-left text-base space-y-2 font-light text-white justify-end">
                   <h1 className="text-green-600 font-normal text-lg mb-2">Our Partners</h1>
                   <Link href="/">Coursera</Link>
                   <Link href="/">Udemy</Link>
@@ -38,7 +38,7 @@ function Footer() {
                   <Link href="/">Udacity</Link>
               </div>
 
-              <div className="flex flex-col md:px-8 text-left text-md space-y-2 font-light text-white">
+              <div className="flex flex-col md:px-8 text-left text-base space-y-2 font-light text-white">
                   <h1 className="text-green-600 font-normal text-lg mb-2">Learn More</h1>
                   <Link href="/">How RedeemFund Works</Link>
                   <Link href="/">Success Stories</Link>

@@ -68,7 +68,7 @@ function Banner() {
                <h1 className="text-2xl sm:text-6xl font-bold">Hakuna Matata</h1>
                <p className="text-sm sm:text-xl font-extralight">The future belongs to those who believe <br/> in the beauty of their dreams</p>
                <button onClick={campaign}
-               className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
+               className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
            </div>
           
         </div>
@@ -84,7 +84,7 @@ function Banner() {
                <h1 className="text-2xl sm:text-6xl font-bold">Hakuna Matata</h1>
                <p className="text-sm sm:text-xl font-extralight">The future belongs to those who believe <br/> in the beauty of their dreams</p>
                <button onClick={campaign}
-               className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
+               className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
            </div>
           
         </div>
@@ -100,7 +100,7 @@ function Banner() {
                <h1 className="text-2xl sm:text-6xl font-bold">Hakuna Matata</h1>
                <p className="text-sm sm:text-xl font-extralight">The future belongs to those who believe <br/> in the beauty of their dreams</p>
                <button onClick={campaign}
-               className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
+               className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition duration-75 ease-out">Start a campaign</button>
            </div>
           
         </div>

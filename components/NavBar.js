@@ -70,7 +70,7 @@ function NavBar() {
       
 
       <div className={`${active ? 'flex flex-col text-left space-y-2 mt-3 ' : 'hidden'
-        } md:flex md:flex-row md:items-center md:justify-between text-md md:mt-0 md:space-y-0`}>
+        } md:flex md:flex-row md:items-center md:justify-between text-base md:mt-0 md:space-y-0`}>
         <Link href="/">Search</Link>
         <Link href="/">Discover</Link>
         <Link href="/">How It Works</Link>

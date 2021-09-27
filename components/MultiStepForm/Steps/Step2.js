@@ -36,6 +36,8 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
         isUploaded && (setImgUrl, nextFormStep())
     };
 
+    console.log(campaignData)
+
     return (
         <div className={`${formStep === 1 ? "flex flex-col justify-center items-center space-y-5 md:p-10 md:max-w-xl mx-auto" : "hidden"}`}>
             <h2 className="text-2xl font-semibold">Select a cover picture</h2>
@@ -62,7 +64,7 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
                     )
                 }
                 <div className="w-full ">
-                    <button className="border-green-600 border-2 rounded-md p-2 text-md hover:scale-105 
+                    <button className="border-green-600 border-2 rounded-md p-2 text-base hover:scale-105 
                     transform transition duration-75 ease-out text-green-600 w-full"
                         onClick={openFileDialog}>
                         Select a picture
@@ -74,7 +76,7 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
                     {currentStep < 4 && (
                         <>
                             {currentStep > 0 && (
-                                <button className="border-green-600 p-2 text-md hover:scale-105 transform transition duration-75 ease-out
+                                <button className="border-green-600 p-2 text-base hover:scale-105 transform transition duration-75 ease-out
                                    text-grey"
                                     onClick={prevFormStep}>
                                     Back
@@ -85,7 +87,7 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
 
 
                     <button
-                        className="border-green-600 p-2 text-md hover:scale-105 transform transition duration-75 ease-out
+                        className="border-green-600 p-2 text-base hover:scale-105 transform transition duration-75 ease-out
              text-grey" onClick={handleSubmit}>
                         Next
                     </button>

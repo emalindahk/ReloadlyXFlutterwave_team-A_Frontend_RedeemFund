@@ -1,18 +1,23 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
-import Image from 'next/image'
-import LinearProgress from '@mui/material/LinearProgress';
+
 import { FormContext } from '../../../context/index';
-import FormCompleted from '../FormCompleted';
 import { useUser } from '../../../lib/hooks';
 import { useRouter } from 'next/dist/client/router'
+import { useSession, getSession } from "next-auth/client";
+import Image from 'next/image'
+
+import FormCompleted from '../FormCompleted';
+
+import LinearProgress from '@mui/material/LinearProgress';
 
 function Step4({ formStep,  currentStep, prevFormStep }) {
 
     const { user } = useUser()
-    const router = useRouter()
+    const [errorMsg, setErrorMsg] = useState('')
     const firstName = user && user.firstName ? user.firstName : '';
     const lastName = user && user.lastName ? user.lastName : '';
     const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
+    const  session  = useSession();
     const { campaignData } = useContext(FormContext)
 
     const [open, setOpen] = useState(false)
@@ -28,11 +33,36 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
     const prevOpen = usePrevious(open)
     const handleComplete = _ => {
         setOpen(!prevOpen)
-        console.log("open +++++", open)
     }
-    const handleSubmit = () => {
-        handleComplete()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const body = {
+            title: campaignData.subject,
+            goalAmount: campaignData.amount,
+            description: campaignData.body,
+            fundType: campaignData.fundType,
+            coverPictureS3: campaignData.image,
+            platform: campaignData.platform
+          };
+      
+        const res = await fetch(`${process.env.NEXT_BASE_API_URL}campaigns`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json",
+            "Authorization": `Bearer ${session && session[0].accessToken}` },
+            body: JSON.stringify(body),
+          });
+          if (res.status === 200) {
+            console.log(res)
+            handleComplete()
+          } else {
+            setErrorMsg(await res.text());
+            console.log(res)
+          }
+        
     };
+
+    console.log(campaignData)
+    console.log('session' ,session[0].accessToken)
 
 
 
@@ -41,6 +71,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
             <div className="flex flex-col items-center space-y-10 md:space-y-16">
                 <h1 className="text-2xl font-semibold">Campaign preview</h1>
                 <FormCompleted openModal={open} setOpen={handleComplete} />
+                {errorMsg && <p className="text-red-500 text-center">{errorMsg}</p>}
                 <form onSubmit={(e) => handleSubmit(e)} className="w-full flex flex-col">
                     <div className="flex flex-col md:flex-row justify-between w-full space-y-10 space-x-10">
                         <div className="flex flex-col space-y-5">
@@ -74,7 +105,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
                             <LinearProgress variant="determinate" value={0} color="primary" className="h-3" />
                             <div className="flex flex-row justify-between w-full py-2 text-xs">
                                 <p>$0</p>
-                                <p>Goal $1000</p>
+                                <p>Goal ${campaignData.amount}</p>
                             </div>
                         </div>
                     </div>
@@ -84,7 +115,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
                         {currentStep < 4 && (
                             <>
                                 {currentStep > 0 && (
-                                    <button className="p-2 rounded-md text-md hover:scale-105 transform transition duration-75 ease-out
+                                    <button className="p-2 rounded-md text-base hover:scale-105 transform transition duration-75 ease-out
                            text-grey order-2"
                                         onClick={prevFormStep}>
                                         Back
@@ -92,7 +123,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
                                 )}
                             </>
                         )}
-                        <button className="bg-green-600 p-2 rounded-md text-md hover:scale-105 transform transition duration-75 ease-out
+                        <button className="bg-green-600 p-2 rounded-md text-base hover:scale-105 transform transition duration-75 ease-out
                          text-white w-full md:order-2">
                             Complete
                         </button>
@@ -106,3 +137,11 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
 }
 
 export default Step4
+
+export async function getServerSideProps(context) {
+    return {
+      props: {
+        session: await getSession(context),
+      },
+    }
+  }

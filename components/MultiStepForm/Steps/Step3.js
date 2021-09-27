@@ -75,14 +75,14 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
                         </label>
                     </div>
 
-                    <button className="bg-green-600 p-2 rounded-md text-md hover:scale-105 transform transition duration-75 ease-out
+                    <button className="bg-green-600 p-2 rounded-md text-base hover:scale-105 transform transition duration-75 ease-out
                     text-white w-full" type="submit">
                         Confirm
                     </button>
                     {currentStep < 4 && (
                         <>
                             {currentStep > 0 && (
-                                <button className="border-green-600 p-2 text-md hover:scale-105 transform transition duration-75 ease-out
+                                <button className="border-green-600 p-2 text-base hover:scale-105 transform transition duration-75 ease-out
                                 text-grey"
                                     onClick={prevFormStep}>
                                     Back

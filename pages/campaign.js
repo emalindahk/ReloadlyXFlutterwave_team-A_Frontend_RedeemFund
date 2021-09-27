@@ -44,9 +44,9 @@ function campaign() {
   return (
         <Layout title="Start a campaign">
             <Header>
-            <div className="relative flex flex-row items-center space-x-3">
+            <div className="relative flex flex-row items-center space-x-4">
           {(profPic)? (
-            <div className="relative h-8 w-8">
+            <div className="relative h-12 w-12">
             <Image src={profPic} layout="fill" className="rounded-full" />
             </div>
           ):(

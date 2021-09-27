@@ -88,7 +88,7 @@ export default function Home() {
                 content="Receive donations for your cause direct to your account" />
             </div>
             <div className="flex justify-center py-8">
-              <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
+              <button className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition 
             duration-75 ease-out mt-4" onClick={startCampaign}>Start a campaign</button>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function Home() {
 
           </div>
           <div className="flex justify-center py-8">
-            <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
+            <button className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition 
             duration-75 ease-out mt-4 text-white" onClick={startCampaign}>Start a campaign</button>
           </div>
         </section>
@@ -158,7 +158,7 @@ export default function Home() {
         <section className="mt-10 md:mt-20 pb-10">
           <h2 className="text-lg md:text-4xl text-center text-grey">Ready to fund your dreams?</h2>
           <div className="flex justify-center py-8">
-            <button className="bg-green-600 rounded-md p-3 text-md hover:scale-105 transform transition 
+            <button className="bg-green-600 rounded-md p-3 text-base hover:scale-105 transform transition 
             duration-75 ease-out mt-4 text-white" onClick={startCampaign}>Start a campaign</button>
           </div>
         </section>
