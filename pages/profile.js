@@ -8,13 +8,14 @@ import Image from 'next/image';
 import Header from "../components/Header";
 import Layout from "../components/Layout";
 import CountrySelect from "../components/CountrySelect";
+import PersonIcon from '@mui/icons-material/Person';
 
 
 function profile() {
 
   const [session, loading] = useSession()
   const [errorMsg, setErrorMsg] = useState("");
-  const [suceessMsg, setSuceessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const router = useRouter();
   const { userData, setUserData } = useContext(FormContext);
   const { user} = useUser()
@@ -32,7 +33,6 @@ function profile() {
     { id: 'UG', country: 'Uganda' },
     { id: 'NG', country: 'Nigeria' }
   ]
-
   let [imageUrl, setImageUrl] = useState();
   let [isUploaded, setImageUploaded] = useState(false)
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
@@ -48,7 +48,6 @@ function profile() {
     setImageUrl(url);
     setImageUploaded(true)
   };
-  console.log(userData)
 
   useEffect(() => {
     if (isUploaded && imageUrl || userData.image) {
@@ -97,7 +96,7 @@ function profile() {
         body: JSON.stringify(body),
       });
       if (res.status === 200) {
-        setSuceessMsg("Profile updated successfully")
+        setSuccessMsg("Profile updated successfully")
         router.push("/");
       } else {
         setErrorMsg(await res.text());
@@ -118,8 +117,8 @@ function profile() {
 
         <div className="max-w-full">
           <form onSubmit={handleSubmit} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6 text-grey">
-            {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
-            {suceessMsg ? <p style={{ color: "green" }}>{suceessMsg}</p> : null}
+          {errorMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
+          {successMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-green-600 text-white text-sm">{successMsg}</div>}
             <div className="flex items-center justify-center">
 
               <FileInput onChange={handleFileChange} />
@@ -130,7 +129,7 @@ function profile() {
                 </div>
               ) : (
                 <div className="flex items-center justify-center rounded-full bg-greySec text-white h-24 w-24">
-                  <p className="text-center text-3xl">EK</p>
+                  <PersonIcon className="h-10 w-10"/>
                 </div>
               )}
             </div>

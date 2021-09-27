@@ -13,6 +13,7 @@ function Signin({ csrfToken }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+  const [successMsg, setSuccessMsg] = useState('')
   const { userData, setUserData } = useContext(FormContext)
 
   const signUp = () => {
@@ -31,8 +32,11 @@ function Signin({ csrfToken }) {
         redirect: false,
       }
     )
-    if (res.status === 200) { setUserData({ ...userData, email: email }) }
-    if (res?.error) console.log(res.error)
+    if (res.status === 200) {
+      setUserData({ ...userData, email: email })
+      setSuccessMsg('You have successfully signed in!')
+    }
+    if (res?.error) { setErrorMsg(res.error) }
     if (res.url) router.push(res.url);
   };
 
@@ -59,7 +63,8 @@ function Signin({ csrfToken }) {
           <h2 className="text-3xl text-center text-primary px-4 pt-6 pb-2">Sign in</h2>
 
           <hr />
-          {errorMsg ? <p style={{ color: "red" }} className="text-center">{errorMsg}</p> : null}
+          {errorMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
+          {successMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-green-600 text-white text-sm">{successMsg}</div>}
           <form method="post" action="/api/auth/callback/credentials" onSubmit={handleLogin} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6">
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className="flex flex-col p-4">

@@ -20,7 +20,6 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
         setCampaignData({ ...campaignData, body: e.target.value })
     }
 
-    console.log(campaignData)
 
 
     return (

@@ -27,7 +27,7 @@ const providers = [
           return user.data
         }
       } catch (e) {
-        console.log("Login errror", e)
+        throw new Error(e)
       }
     }
   }),

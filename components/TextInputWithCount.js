@@ -11,7 +11,6 @@ function TextInputWithCount() {
 
     const handleType = (e) => {
         const val = e.target.value;
-        console.log(val.length, val)
         if(val.length <= state.countLimit){
             setState((prev) => {
             return{
@@ -33,7 +32,6 @@ function TextInputWithCount() {
 
      const handleChange = (e) => {
          const val = e.target.value;
-         console.log(val.length, val)
             if(val.length > state.countLimit){
                 setState(prev => {
                     return {

@@ -13,15 +13,11 @@ import { useRouter } from 'next/dist/client/router';
 export default function Home() {
 
   const router = useRouter();
-
   const startCampaign = () => {
     router.push({
       pathname: '/campaign',
     })
   }
-
-  
-
 
   return (
     <div>
@@ -166,6 +162,7 @@ export default function Home() {
         {/* Contact Us Section */}
 
         <section className="hidden md:block bg-contact relative">
+          
           <div className="absolute h-full w-full bg-black bg-opacity-70"></div>
 
           <div className="grid grid-cols-2 p-14 gap-14">
@@ -178,8 +175,7 @@ export default function Home() {
 
             <div>
               <ContactForm />
-              <button className="bg-green-600 rounded-md p-4 text-sm hover:scale-105 transform transition 
-            duration-75 ease-out mt-4 text-white z-50">Send a message</button>
+              
             </div>
 
           </div>

@@ -52,17 +52,13 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
             body: JSON.stringify(body),
           });
           if (res.status === 200) {
-            console.log(res)
             handleComplete()
           } else {
             setErrorMsg(await res.text());
-            console.log(res)
           }
         
     };
 
-    console.log(campaignData)
-    console.log('session' ,session[0].accessToken)
 
 
 

@@ -6,6 +6,7 @@ import { useRouter } from 'next/dist/client/router';
 const SignupPage = () => {
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -23,6 +24,7 @@ const SignupPage = () => {
       body: JSON.stringify(body),
     });
     if (res.status === 200) {
+      setSuccessMsg("You have successfully signed up!");
       router.push("/profile");
     } else {
       setErrorMsg(await res.text());
@@ -44,7 +46,8 @@ const SignupPage = () => {
           <h2 className="text-3xl text-center text-primary px-4 pt-6 pb-2">Sign up</h2>
           <hr />
           <form onSubmit={handleSubmit} className="flex flex-col px-10 pt-7 pb-4 space-y-6">
-            {/* {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null} */}
+          {errorMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
+          {successMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-green-600 text-white text-sm">{successMsg}</div>}
 
             <div className="grid md:grid-cols-2 gap-10 px-4">
 

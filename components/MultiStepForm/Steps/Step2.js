@@ -36,7 +36,6 @@ function Step2({ formStep, nextFormStep, prevFormStep, currentStep }) {
         isUploaded && (setImgUrl, nextFormStep())
     };
 
-    console.log(campaignData)
 
     return (
         <div className={`${formStep === 1 ? "flex flex-col justify-center items-center space-y-5 md:p-10 md:max-w-xl mx-auto" : "hidden"}`}>
