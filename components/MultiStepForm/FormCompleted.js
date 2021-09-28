@@ -56,7 +56,8 @@ export default function FormCompleted({openModal, setOpen}) {
                                     <p className="text-xs text-center"> Currently only people around you who already know your campaign  URL can support you.
                                         Share your campaign with many more people in order to get more support</p>
                                     <button className="bg-green-600 border-2 text-white rounded-md py-2 px-4 
-                                        text-sm hover:scale-105 transform transition duration-75 ease-out" >
+                                        text-sm hover:scale-105 transform transition duration-75 ease-out" 
+                                        onClick={share}>
                                         OK</button>
                                 </div>
                             </div>

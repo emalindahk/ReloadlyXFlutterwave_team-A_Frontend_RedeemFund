@@ -24,8 +24,10 @@ const SignupPage = () => {
       body: JSON.stringify(body),
     });
     if (res.status === 200) {
+      setTimeout(() => {
       setSuccessMsg("You have successfully signed up!");
-      router.push("/profile");
+        router.push('/profile')
+    }, 2000)
     } else {
       setErrorMsg(await res.text());
     }

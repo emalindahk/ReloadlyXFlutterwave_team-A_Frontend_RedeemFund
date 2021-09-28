@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import Modal from '../Modal';
 import { FormContext } from '../../../context/index';
@@ -6,21 +6,25 @@ import { FormContext } from '../../../context/index';
 
 function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
 
-    const handleSubmit = (values) => {
-        nextFormStep();
-    };
 
     const { campaignData, setCampaignData } = useContext(FormContext)
+    const CHARACTER_LIMIT = 50;
+    const [values, setValues] = useState({
+        title: ''
+    });
 
-    const setSubject = (e) => {
+    const handleChange = title => e => {
+        setValues({ ...values, [title]: e.target.value });
         setCampaignData({ ...campaignData, subject: e.target.value })
-    }
+    };
 
     const setBody = (e) => {
         setCampaignData({ ...campaignData, body: e.target.value })
     }
 
-
+    const handleSubmit = () => {
+        nextFormStep();
+    };
 
     return (
         <div className={`${formStep === 2 ? "flex flex-col md:p-10 justify-center items-center md:max-w-xl mx-auto" : 'hidden'}`}>
@@ -39,13 +43,18 @@ function Step3({ formStep, nextFormStep, currentStep, prevFormStep }) {
                     <div className="w-full space-y-2">
                         <label htmlFor="" className="flex flex-col space-y-2 w-full">
                             <span className="font-semibold">Title</span>
-                            <input type="text" className="mt-1 px-4 py-3 block w-full rounded-md border-greyPrim shadow-sm focus:border-green-600 
-                            focus:ring focus:ring-green-600 focus:ring-opacity-50" placeholder="Subject"
-                                value={campaignData['subject'] || ''}
-                                onChange={setSubject}
-                                required />
+                            <div className="flex flex-col space-y-2 w-full">
+                                <input type="text"
+                                    value={values.title}
+                                    onChange={handleChange("title")}
+                                    maxLength={CHARACTER_LIMIT}
+                                    required
+                                    className="mt-1 px-4 py-3 block w-full rounded-md border-greyPrim shadow-sm focus:border-green-600 
+                                    focus:ring focus:ring-green-600 focus:ring-opacity-50"
+                                />
+                                <span className="text-xs text-greySec w-full text-right">{`${values.title.length}/${CHARACTER_LIMIT}`}</span>
+                            </div>
                         </label>
-                        <div className="text-xs text-greySec w-full text-right">4/60</div>
                     </div>
 
                     <div className="w-full space-y-2">

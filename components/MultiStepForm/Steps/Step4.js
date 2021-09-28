@@ -9,6 +9,7 @@ import Image from 'next/image'
 import FormCompleted from '../FormCompleted';
 
 import LinearProgress from '@mui/material/LinearProgress';
+import slugify from '../../../lib/util';
 
 function Step4({ formStep,  currentStep, prevFormStep }) {
 
@@ -18,7 +19,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
     const lastName = user && user.lastName ? user.lastName : '';
     const profPic = user && user.profilePhotoS3 ? user.profilePhotoS3 : '';
     const  session  = useSession();
-    const { campaignData } = useContext(FormContext)
+    const { campaignData, setCampaignData } = useContext(FormContext)
 
     const [open, setOpen] = useState(false)
 
@@ -52,13 +53,12 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
             body: JSON.stringify(body),
           });
           if (res.status === 200) {
+            setCampaignData({...campaignData, slug: slugify(campaignData.subject)})
             handleComplete()
           } else {
             setErrorMsg(await res.text());
           }
-        
     };
-
 
 
 

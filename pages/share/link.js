@@ -2,13 +2,16 @@ import React from 'react'
 import HeaderWithProfile from '../../components/HeaderWithProfile'
 import Layout from '../../components/Layout'
 import Image from 'next/image'
+import { FormContext } from '../../context'
 import { useRouter } from 'next/dist/client/router'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ClipboardCopy from '../../components/ClipboardCopy'
 
 function link() {
     const router = useRouter()
-    const skip = () => {
-        router.push('/share/link')
+    const { campaignData } = useContext(FormContext)
+    const slug = campaignData.slug
+    const complete = () => {
+        router.push('/')
     }
     return (
         <Layout>
@@ -26,18 +29,12 @@ function link() {
                         <Image src="/links.png" layout="fill" objectFit="contain" />
                     </div>
 
-                    <div className="flex flex-row space-x-5 items-center w-full justify-center px-4">
-                        <input type="text" name="link" id="link" 
-                        disabled
-                        className="mt-1 px-4 py-3 block w-2/4 rounded-md border-gray-400 shadow-sm"/>
-                        <button className="flex flex-row text-white bg-greySec rounded-md p-3 text-base"> 
-                        <ContentCopyIcon className="h-6 w-6 mr-3" />
-                        Copy </button>
-                    </div>
+                    <ClipboardCopy copyText={`https://redeemfund.vercel.app/campaign/${slug}`}/>
 
                     <div className="w-full md:w-3/4 md:px-16">
                     <button className="flex flex-row items-center justify-center bg-green-600 text-white rounded-md 
-                           p-3 text-sm md:text-lg hover:scale-105 transform transition duration-75 ease-out mt-4 w-full" >
+                           p-3 text-sm md:text-lg hover:scale-105 transform transition duration-75 ease-out mt-4 w-full"
+                           onClick={complete}>
                            Complete
                         </button>
                     </div>

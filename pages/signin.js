@@ -16,6 +16,8 @@ function Signin({ csrfToken }) {
   const [successMsg, setSuccessMsg] = useState('')
   const { userData, setUserData } = useContext(FormContext)
 
+ 
+
   const signUp = () => {
     router.push({
       pathname: '/signup',
@@ -28,15 +30,21 @@ function Signin({ csrfToken }) {
       {
         email,
         password,
-        callbackUrl: `${window.location.origin}/profile`,
+        callbackUrl: `${window.location.origin}`,
         redirect: false,
       }
     )
     if (res.status === 200) {
-      setUserData({ ...userData, email: email })
-      setSuccessMsg('You have successfully signed in!')
+      setTimeout(() => {
+        setUserData({ ...userData, email: email })
+    }, 2000)
     }
-    if (res?.error) { setErrorMsg(res.error) }
+    if (res.error) { 
+      setErrorMsg(res.error)
+     } else {   
+      setSuccessMsg('You have successfully signed in!')
+     }
+
     if (res.url) router.push(res.url);
   };
 
@@ -63,9 +71,9 @@ function Signin({ csrfToken }) {
           <h2 className="text-3xl text-center text-primary px-4 pt-6 pb-2">Sign in</h2>
 
           <hr />
-          {errorMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
-          {successMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-green-600 text-white text-sm">{successMsg}</div>}
+          
           <form method="post" action="/api/auth/callback/credentials" onSubmit={handleLogin} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6">
+          {errorMsg &&  <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className="flex flex-col p-4">
               <button className="flex bg-fbBlue text-white py-3 items-center justify-center rounded-md"

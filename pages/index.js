@@ -35,8 +35,7 @@ export default function Home() {
         {/* <section className="p-10">
           <CampaignCard/>
         </section> */}
-      
-       
+
         {/* About Us Section */}
        
 

@@ -121,7 +121,7 @@ function Step1({ formStep, nextFormStep }) {
 
              <label htmlFor="amount" className="flex flex-col space-y-2">
              <span className="font-semibold">Goal Amount</span>
-             <input id="name" name="name" type="text" className="mt-1 px-4 py-3 block w-full border-greyPrim rounded-md shadow-sm focus:border-lightBlue 
+             <input id="name" name="name" type="number" className="mt-1 px-4 py-3 block w-full border-greyPrim rounded-md shadow-sm focus:border-lightBlue 
             focus:ring focus:ring-lightBlue focus:ring-opacity-50" placeholder="Enter Amount in US Dollars" 
             value={campaignData['amount'] || ''}
             onChange={setAmount}

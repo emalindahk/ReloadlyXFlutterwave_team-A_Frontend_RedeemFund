@@ -17,6 +17,27 @@ function setPassword() {
         router.push('/signup')
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (password !== confirmPassword) { setErrorMsg('Passwords do not match') }
+        else { setErrorMsg('') }
+        if (password.length < 8) { setErrorMsg('Password must be at least 8 characters long') }
+        else { setErrorMsg('') }
+        if (password.length > 0 && confirmPassword.length > 0 && password === confirmPassword && password.length > 7) {
+            const res = await fetch(`${process.env.NEXT_BASE_API_URL}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password : password })
+            })
+            if (res.status === 200) {
+                setSuccessMsg('Password successfully changed')
+                setTimeout(() => {
+                    router.push('/login')
+                }, 2000)
+            } else { setErrorMsg('Something went wrong') }
+          }
+        }
+
     
     return (
         <Layout title="SignIn">
@@ -26,8 +47,8 @@ function setPassword() {
           <h2 className="text-2xl text-center text-primary px-4 pt-6 pb-2">Set New Password</h2>
 
           <hr />
-          {errorMsg ? <p style={{ color: "red" }} className="text-center">{errorMsg}</p> : null}
-          {successMsg ? <p style={{ color: "green" }} className="text-center">{successMsg}</p> : null}
+          {errorMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
+          {successMsg && <div className="absolute top-0 right-0 m-4 p-4 bg-green-600 text-white text-sm">{successMsg}</div>}
           <form method="post" className="flex flex-col md:px-10 pt-7 pb-4 space-y-6" >
             <div className="flex flex-col space-y-5 px-4">
              <p className="text-base">Your new password must be different from your previously used password</p>
