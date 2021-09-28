@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import HeaderWithProfile from '../../components/HeaderWithProfile'
 import Layout from '../../components/Layout'
 import Image from 'next/image'
