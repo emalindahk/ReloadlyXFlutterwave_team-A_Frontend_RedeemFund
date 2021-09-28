@@ -111,7 +111,7 @@ function Signin({ csrfToken }) {
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Create a password"
+                  placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="mt-1 px-4 py-3 block w-full rounded-md border-gray-400 shadow-sm focus:border-lightBlue 
