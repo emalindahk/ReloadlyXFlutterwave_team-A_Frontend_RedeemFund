@@ -89,7 +89,7 @@ function profile() {
       phoneNumber: mobileNo,
       };
     
-    const res = await fetch(`${process.env.NEXT_BASE_API_URL}beneficiary`, {
+    const res = await fetch(`${process.env.BASE_API_URL}beneficiary`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", 
         "Authorization": `Bearer ${session && session.accessToken}` },

@@ -24,7 +24,7 @@ function setPassword() {
         if (password.length < 8) { setErrorMsg('Password must be at least 8 characters long') }
         else { setErrorMsg('') }
         if (password.length > 0 && confirmPassword.length > 0 && password === confirmPassword && password.length > 7) {
-            const res = await fetch(`${process.env.NEXT_BASE_API_URL}`, {
+            const res = await fetch(`${process.env.BASE_API_URL}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password : password })

@@ -46,7 +46,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
             platform: campaignData.platform
           };
       
-        const res = await fetch(`${process.env.NEXT_BASE_API_URL}campaigns`, {
+        const res = await fetch(`${process.env.BASE_API_URL}campaigns`, {
             method: "POST",
             headers: { "Content-Type": "application/json",
             "Authorization": `Bearer ${session && session[0].accessToken}` },
