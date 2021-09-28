@@ -13,7 +13,7 @@ function ContactForm() {
             message: e.currentTarget.message.value,
             subject: e.currentTarget.subject.value
         }
-        const res = await fetch(`${process.env.NEXT_BASE_API_URL}inquiry`,
+        const res = await fetch(`${process.env.BASE_API_URL}inquiry`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

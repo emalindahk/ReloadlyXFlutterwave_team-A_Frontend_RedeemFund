@@ -6,6 +6,10 @@
     height: 1rem !important;
 }
 
+.rounded {
+    border-radius: 0.5rem !important;
+}
+
 .MuiLinearProgress-bar{
     background-color: #3EB489;
 }

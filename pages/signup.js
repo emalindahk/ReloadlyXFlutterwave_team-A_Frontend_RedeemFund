@@ -18,7 +18,7 @@ const SignupPage = () => {
       password: e.currentTarget.password.value,
     };
 
-  const res = await fetch(`${process.env.NEXT_BASE_API_URL}register`, {
+  const res = await fetch(`${process.env.BASE_API_URL}register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

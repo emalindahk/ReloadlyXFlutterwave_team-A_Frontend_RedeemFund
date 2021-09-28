@@ -35,7 +35,7 @@ function NavBar() {
 
   const startCampaign = () => {
     router.push({
-      pathname: '/campaign',
+      pathname: '/create-campaign',
     })
   }
 

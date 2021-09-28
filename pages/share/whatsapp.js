@@ -17,9 +17,10 @@ function whatsapp() {
     const skip = () => {
         router.push('/share/messenger')
     }
+    console.log(campaignData)
     
     return (
-        <Layout>
+        <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
 
             <HeaderWithProfile />
 

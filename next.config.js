@@ -8,7 +8,9 @@ module.exports = {
       ],
     },
     env: {
-      NEXT_BASE_API_URL: process.env.NEXT_BASE_API_URL,
+      BASE_API_URL: process.env.BASE_API_URL,
+      FACEBOOK_ID: process.env.FACEBOOK_ID,
+      FACEBOOK_SECRET: process.env.FACEBOOK_SECRET,
     }
   };
   
