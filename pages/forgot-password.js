@@ -34,7 +34,6 @@ function forgotPassword() {
         }
       };
 
-
     return (
     <Layout title="SignIn">
       <Header content="Do not have an account?" link={signUp} button="Sign Up" />

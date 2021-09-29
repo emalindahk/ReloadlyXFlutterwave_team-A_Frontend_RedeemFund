@@ -8,7 +8,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 function CampaignCard({title, country, goalAmount, percentage, category, currentAmount}) {
     return (
-        <div className="w-60 h-[300px] flex flex-col justify-between border-l-2 border-r-2 ">
+        <div className="w-60 h-[300px] flex flex-col justify-between border-l-2 border-r-2">
             <div className="flex flex-col">
             <div className="relative h-36">
                 <Image src="/test1.png" layout="fill" objectFit="cover"/>

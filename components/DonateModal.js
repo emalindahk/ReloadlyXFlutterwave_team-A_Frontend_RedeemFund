@@ -1,41 +1,48 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { useRouter } from 'next/dist/client/router'
 
 export default function DonateModal({ openModal, setOpen, slug }) {
 
     const cancelButtonRef = useRef(null)
-    const [amount, setAmount ] = useState('')
+    const [amount, setAmount] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [email, setEmail] = useState('')
     const [fullName, setFullName] = useState('')
+    const router = useRouter()
 
 
 
     const handleDonate = async (e) => {
-        const body = {
+
+        const data = {
             phoneNumber: phoneNumber,
             amount: amount,
             fullName: fullName,
-            email: email, 
-        }
-        const res = await fetch (`${process.env.BASE_API_URL}make-payment/${slug}`, {
-            method: 'POST',
-            headers: {  'Content-Type': 'application/json' },
-            body: JSON.stringify(body)
+            email: email
+        };
+
+        fetch(`${process.env.BASE_API_URL}make-payment/${slug}`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         })
-        if (res.status === 200) {
-            setOpen(false)
-            console.log(res)
-        } else {
-            console.log('error')
-        }
+            .then(response => response.json())
+            .then(data => {
+                if (data.paymentRedirectLink) router.push(data.paymentRedirectLink)
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
 
     return (
         <Transition.Root show={openModal} as={Fragment}>
-            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} 
-            onClose={() => (setOpen(false))}>
+            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef}
+                onClose={() => (setOpen(false))}>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
                         as={Fragment}
@@ -46,7 +53,7 @@ export default function DonateModal({ openModal, setOpen, slug }) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                    <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                        <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
@@ -63,7 +70,7 @@ export default function DonateModal({ openModal, setOpen, slug }) {
                     >
                         <form className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden 
                         shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                        onSubmit={() => handleDonate()}>
+                            onSubmit={() => handleDonate()}>
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div className="sm:flex sm:items-start ">
                                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
@@ -71,60 +78,60 @@ export default function DonateModal({ openModal, setOpen, slug }) {
                                             Make Donation
                                         </Dialog.Title>
                                         <div className="mt-2 flex flex-col items-center w-full space-y-2 text-sm">
-                                          
+
                                             <label htmlFor="fullName" className="flex flex-col space-y-2 w-full">
                                                 <span className="font-semibold">Full Name</span>
-                                                <input id="fullName" 
-                                                name="fullName" 
-                                                type="text" 
-                                                className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
-                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50" 
-                                                placeholder="Enter Full Name"
-                                                value={fullName || ''}
-                                                onChange={(e) => setFullName(e.target.value)}
-                                                required />
+                                                <input id="fullName"
+                                                    name="fullName"
+                                                    type="text"
+                                                    className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
+                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50"
+                                                    placeholder="Enter Full Name"
+                                                    value={fullName || ''}
+                                                    onChange={(e) => setFullName(e.target.value)}
+                                                    required />
                                             </label>
 
                                             <label htmlFor="phoneNumber" className="flex flex-col space-y-2 w-full">
                                                 <span className="font-semibold">Phone Number</span>
-                                                <input 
-                                                id="phoneNumber" 
-                                                name="phoneNumber" 
-                                                type="text" 
-                                                className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
-                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50" 
-                                                placeholder="Enter Phone Number"
-                                                value={phoneNumber || ''}
-                                                onChange={(e) => setPhoneNumber(e.target.value)}
-                                                required />
+                                                <input
+                                                    id="phoneNumber"
+                                                    name="phoneNumber"
+                                                    type="text"
+                                                    className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
+                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50"
+                                                    placeholder="Enter Phone Number"
+                                                    value={phoneNumber || ''}
+                                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                                    required />
                                             </label>
 
                                             <label htmlFor="email" className="flex flex-col space-y-2 w-full">
                                                 <span className="font-semibold">Email Address</span>
-                                                <input 
-                                                id="email" 
-                                                name="email" 
-                                                type="text" 
-                                                className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
-                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50" 
-                                                placeholder="Enter Email Address"
-                                                value={email || ''}
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                required />
+                                                <input
+                                                    id="email"
+                                                    name="email"
+                                                    type="text"
+                                                    className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm 
+                                                focus:border-green-600 focus:ring focus:ring-green-600 focus:ring-opacity-50"
+                                                    placeholder="Enter Email Address"
+                                                    value={email || ''}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    required />
                                             </label>
 
                                             <label htmlFor="amount" className="flex flex-col space-y-2 w-full">
                                                 <span className="font-semibold">Amount</span>
-                                                <input 
-                                                id="amount" 
-                                                name="amount" 
-                                                type="number" 
-                                                className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm focus:border-lightBlue 
-                                                focus:ring focus:ring-green-600 focus:ring-opacity-50" 
-                                                placeholder="Enter Amount in US Dollars"
-                                                value={amount || ''}
-                                                onChange={(e) => setAmount(e.target.value)}
-                                                required />
+                                                <input
+                                                    id="amount"
+                                                    name="amount"
+                                                    type="number"
+                                                    className="mt-1 px-4 py-2 block w-full border-greyPrim rounded-md shadow-sm focus:border-lightBlue 
+                                                focus:ring focus:ring-green-600 focus:ring-opacity-50"
+                                                    placeholder="Enter Amount in US Dollars"
+                                                    value={amount || ''}
+                                                    onChange={(e) => setAmount(e.target.value)}
+                                                    required />
                                             </label>
                                         </div>
                                     </div>

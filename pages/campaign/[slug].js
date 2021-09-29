@@ -127,7 +127,7 @@ function Campaign({ post }) {
 
                             <div className="flex flex-col items-center w-full space-y-3">
                                 <h2 className="text-lg font-semibold md:mt-12">Help by sharing</h2>
-                                <div className="grid grid-cols-3 w-1/2 pl-2">
+                                <div className="grid grid-cols-3 w-1/2">
 
                                     <WhatsappShareButton
                                         url={`https:/redeemfund.vercel.app/campaign/${slug}`}
