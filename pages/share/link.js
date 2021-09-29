@@ -14,7 +14,7 @@ function link() {
         router.push('/')
     }
     return (
-        <Layout>
+        <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
             <HeaderWithProfile />
             <div className="justify-center w-ful">
                 <div className="flex flex-col max-w-5xl mx-auto items-center justify-center p-10 space-y-5">

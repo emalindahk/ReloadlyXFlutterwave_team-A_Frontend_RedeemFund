@@ -2,7 +2,6 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 
 import { FormContext } from '../../../context/index';
 import { useUser } from '../../../lib/hooks';
-import { useRouter } from 'next/dist/client/router'
 import { useSession, getSession } from "next-auth/client";
 import Image from 'next/image'
 
@@ -98,7 +97,7 @@ function Step4({ formStep,  currentStep, prevFormStep }) {
                         <div className="flex flex-col md:w-1/3">
                             <h3 className="text-left md:text-center font-semibold">Collected Amount</h3>
                             <p className="text-center">$0</p>
-                            <LinearProgress variant="determinate" value={0} color="primary" className="h-3" />
+                            <LinearProgress variant="determinate" value={0} color="primary" className="h-3 rounded" />
                             <div className="flex flex-row justify-between w-full py-2 text-xs">
                                 <p>$0</p>
                                 <p>Goal ${campaignData.amount}</p>

@@ -15,7 +15,7 @@ function twitter() {
         router.push('/share/link')
     }
     return (
-        <Layout title="Share on Twitter">
+        <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
 
             <HeaderWithProfile/>
 
@@ -36,7 +36,7 @@ function twitter() {
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-1/2">
                         <TwitterShareButton
                             url={`https://redeemfund.vercel.app/campaign/${slug}`}
-                            title={'next-share is a social share buttons for your next React apps.'}>
+                            title={'Join our mission to help people earn skills and courses as a way to better pursue their passions.⁣'}>
                             <TwitterIcon className="w-10 h-10 mr-2" />
                             Share on twitter
                         </TwitterShareButton>

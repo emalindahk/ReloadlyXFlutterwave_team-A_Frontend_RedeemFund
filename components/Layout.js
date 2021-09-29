@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import Footer from './Footer'
 
-function Layout({ children, title, twitterHandle, currentURL, previewImage }) {
+function Layout({ children, title, twitterHandle, currentURL, previewImage, description }) {
 
   const desc = "RedeemFund is a community of people who want to fund skills and courses for themselves and others. Come to RedeemFund to learn, share, and collaborate."
   return (
@@ -16,7 +16,7 @@ function Layout({ children, title, twitterHandle, currentURL, previewImage }) {
         <meta property="og:image" content={previewImage} key="ogimage" />
         <meta property="og:site_name" content="RedeemFund" key="ogsitename" />
         <meta property="og:title" content={title} key="ogtitle" />
-        <meta property="og:description" content={desc} key="ogdesc" />
+        <meta property="og:description" content={description} key="ogdesc" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" /> 
 

@@ -14,11 +14,14 @@ function facebook() {
     const slug = campaignData.slug
     const skip = () => {
         router.push('/share/twitter')
-    }
-    return (
-        <Layout>
 
-            <HeaderWithProfile />
+    }
+
+    console.log(campaignData)
+    return (
+        <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
+
+            <HeaderWithProfile/>
 
             <div className="justify-center w-ful">
                 <div className="flex flex-col max-w-5xl mx-auto items-center justify-center p-10 space-y-5">
@@ -36,8 +39,8 @@ function facebook() {
                     <div className="flex flex-row items-center justify-center bg-facebook text-white rounded-md
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-1/2">
                         <FacebookShareButton
-                            url={`https://redeemfund.vercel.app/campaign/${slug}`}
-                            quote={'next-share is a social share buttons for your next React apps.'}
+                            url={`https://redeemfund.vercel.app/campaign`}
+                            quote={'Join our mission to help people earn skills and courses as a way to better pursue their passions.⁣'}
                             hashtag={'#redeemFund'}>
                             <FacebookIcon className="w-10 h-10 mr-2" />
                             Share on facebook

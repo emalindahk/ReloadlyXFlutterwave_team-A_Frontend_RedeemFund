@@ -12,7 +12,7 @@ import { Step1, Step2, Step3, Step4 } from '../components/MultiStepForm/Steps'
 import FormLayout from '../components/MultiStepForm/FormLayout'
 import FormCompleted from '../components/MultiStepForm/FormCompleted'
 
-function campaign() {
+function createCampaign() {
 
   const [formStep, setFormStep] = useState(0);
   const [session, loading] = useSession();
@@ -68,7 +68,7 @@ function campaign() {
     )
 }
 
-export default campaign
+export default createCampaign
 
 export async function getServerSideProps(context) {
   return {

@@ -8,7 +8,7 @@ function Banner() {
     const router = useRouter();
 
     const campaign = () => {
-        router.push('/campaign');
+        router.push('/create-campaign');
     }
 
     return (

@@ -14,7 +14,7 @@ function messenger() {
         router.push('/share/facebook')
     }
     return (
-        <Layout>
+        <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
 
             <HeaderWithProfile />
 

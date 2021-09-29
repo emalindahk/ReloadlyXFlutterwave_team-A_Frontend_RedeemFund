@@ -15,7 +15,7 @@ export default function Home() {
   const router = useRouter();
   const startCampaign = () => {
     router.push({
-      pathname: '/campaign',
+      pathname: '/create-campaign',
     })
   }
 
