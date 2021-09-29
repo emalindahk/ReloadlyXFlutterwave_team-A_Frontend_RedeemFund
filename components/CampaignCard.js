@@ -1,26 +1,34 @@
 import React from 'react'
+
 import Image from 'next/image'
+import { useRouter } from 'next/dist/client/router'
+
 import LinearProgress from '@mui/material/LinearProgress';
 
-function CampaignCard() {
+
+function CampaignCard({title, country, goalAmount, percentage, category, currentAmount}) {
     return (
-        <div className="w-56 border-2 flex flex-col">
+        <div className="w-60 h-[300px] flex flex-col justify-between border-l-2 border-r-2 ">
+            <div className="flex flex-col">
             <div className="relative h-36">
                 <Image src="/test1.png" layout="fill" objectFit="cover"/>
             </div>
             <div className="flex flex-col p-4 space-y-3">
-                <h3 className="text-sm">Raising Funds for a product design in udemy </h3>
+                <h3 className="text-sm">{title} </h3>
                 <div className="flex flex-row justify-between">
-                  <span>🇳🇬</span>
-                  <p>Course</p>
+                  <span>{country}</span>
+                  <p>{category}</p>
                 </div>
                 <div className="flex flex-row justify-between">
-                  <span>$200</span>
-                  <p>50%</p>
+                  <span>${goalAmount}</span>
+                  <p>{percentage}%</p>
                 </div>
                
             </div>
-            <LinearProgress variant="determinate" value={50} color="success"  className="justify-end"/>
+            </div>
+            <div >
+            <LinearProgress variant="determinate" value={currentAmount} color="success" className="h-2"/>
+            </div>
         </div>
     )
 }
