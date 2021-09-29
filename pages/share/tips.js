@@ -9,7 +9,6 @@ function tips() {
     const whatsapp = () => {
         router.push ('/share/whatsapp')
     }
-    const { campaignData } = useContext(FormContext)
 
     return (
         <Layout title="Sharing Tips">
