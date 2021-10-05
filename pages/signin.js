@@ -43,9 +43,9 @@ function Signin({ csrfToken }) {
       setErrorMsg(res.error)
      } else {   
       setSuccessMsg('You have successfully signed in!')
+      router.push('/profile')
      }
 
-    if (res.url) router.push(res.url);
   };
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function Signin({ csrfToken }) {
           
           <form method="post" action="/api/auth/callback/credentials" onSubmit={handleLogin} className="flex flex-col md:px-10 pt-7 pb-4 space-y-6">
           {errorMsg &&  <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken } />
             <div className="flex flex-col p-4">
               <button className="flex bg-fbBlue text-white py-3 items-center justify-center rounded-md">
                 <div className="relative h-7 w-7 mr-4">

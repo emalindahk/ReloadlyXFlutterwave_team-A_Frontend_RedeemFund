@@ -3,7 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import { useUser } from "../lib/hooks";
 import { useS3Upload } from 'next-s3-upload';
 import { FormContext } from '../context/index'
-import { useSession, getSession, signOut } from "next-auth/client";
+import { useSession,  signOut } from "next-auth/client";
 import Image from 'next/image';
 import Header from "../components/Header";
 import Layout from "../components/Layout";
@@ -50,12 +50,6 @@ function profile() {
   };
 
   useEffect(() => {
-    if (isUploaded && imageUrl || userData.image) {
-      setUserData({ ...userData, image: imageUrl ? imageUrl : userData.image });
-    }
-  }, [imageUrl])
-
-  useEffect(() => {
     if (!loading && !session?.accessToken) {
       router.push('/signin')
     }
@@ -66,6 +60,13 @@ function profile() {
       <div className="flex items-center justify-center">You need to be signed in.</div>
     )
   }
+
+  useEffect(() => {
+    if (isUploaded && imageUrl || userData.image) {
+      setUserData({ ...userData, image: imageUrl ? imageUrl : userData.image });
+    }
+  }, [imageUrl])
+
 
   const handleCountryChange = (e) => {
     setCountryId(e.target.value);
@@ -188,11 +189,11 @@ function profile() {
 
 export default profile
 
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      session: await getSession(context),
-    },
-  }
-}
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//       session: await getSession(context),
+//     },
+//   }
+// }
 
