@@ -4,20 +4,20 @@ import Layout from '../../components/Layout'
 import Image from 'next/image'
 import { FormContext } from '../../context'
 import { useRouter } from 'next/dist/client/router'
+import { useUser } from "../../lib/hooks";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { FacebookShareButton } from 'next-share';
 
 
-function facebook({post}) {
+function facebook() {
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
+    const { user } = useUser()
     const slug = campaignData.slug
     const skip = () => {
         router.push('/share/twitter')
-
     }
 
-    console.log(campaignData)
     return (
         <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
 
@@ -40,7 +40,8 @@ function facebook({post}) {
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-1/2">
                         <FacebookShareButton
                             url={`https://redeemfund.vercel.app/campaign/${slug}`}
-                            quote={`Support ${post.beneficiary.firstName} ${post.beneficiary.lastName} with a ${post.title}`}
+                            quote={`Support ${user && user.firstName ? user.firstName : 'me'} ${user && user.lastName ? user.lastName : ''} with 
+                            a ${campaignData && campaignData.subject ? campaignData.subject : 'campaign'}`}
                             hashtag={'#redeemFund'}>
                             <FacebookIcon className="w-10 h-10 mr-2" />
                             Share on facebook
@@ -58,27 +59,4 @@ function facebook({post}) {
 
 export default facebook
 
-export async function getStaticPaths() {
-    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
-    const campaign = await res.json();
-    const paths = campaign.map((item) => ({
-        params: { slug: item.slug },
-    }));
 
-    return {
-        paths,
-        fallback: false,
-    };
-}
-
-export async function getStaticProps({ params }) {
-    const { slug } = params;
-
-    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
-    const data = await res.json();
-    const post = data[0]
-
-    return {
-        props: { post },
-    };
-}

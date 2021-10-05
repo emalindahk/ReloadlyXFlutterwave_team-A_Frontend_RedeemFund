@@ -6,18 +6,20 @@ import { useRouter } from 'next/dist/client/router'
 import { WhatsappShareButton } from 'next-share'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { FormContext } from '../../context'
+import { useUser } from "../../lib/hooks";
 
 
 
-function whatsapp({post}) {
+function whatsapp() {
 
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
+    const { user} = useUser()
     const slug = campaignData.slug
     const skip = () => {
         router.push('/share/messenger')
     }
-    console.log(campaignData)
+    console.log(user)
     
     return (
         <Layout title={campaignData.title} previewImage={campaignData.image} description={campaignData.body}>
@@ -40,7 +42,8 @@ function whatsapp({post}) {
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-3/4">
                             <WhatsappShareButton
                                 url={`https://redeemfund.vercel.app/campaign/${slug}`}
-                                title={`Support ${post.beneficiary.firstName} ${post.beneficiary.lastName} with a ${post.title}`}
+                                title={`Support ${user && user.firstName ? user.firstName : 'me'} ${user && user.lastName ? user.lastName : ''} with 
+                                a ${campaignData && campaignData.subject ? campaignData.subject : 'campaign'}`}
                                 separator=":: ">
                                 <WhatsAppIcon className="w-10 h-10 mr-2" />
                                 Share through whatsapp
@@ -58,27 +61,3 @@ function whatsapp({post}) {
 
 export default whatsapp
 
-export async function getStaticPaths() {
-    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
-    const campaign = await res.json();
-    const paths = campaign.map((item) => ({
-        params: { slug: item.slug },
-    }));
-
-    return {
-        paths,
-        fallback: false,
-    };
-}
-
-export async function getStaticProps({ params }) {
-    const { slug } = params;
-
-    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
-    const data = await res.json();
-    const post = data[0]
-
-    return {
-        props: { post },
-    };
-}
