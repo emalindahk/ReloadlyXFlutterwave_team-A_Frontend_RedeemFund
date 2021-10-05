@@ -19,6 +19,8 @@ function Campaign({ post }) {
 
     const [open, setOpen] = useState(false)
     const slug = post.slug
+    const coverPic = post.coverPictureS3
+    const defaultPic = '/defaultPic.png'
 
     const usePrevious = (value) => {
         const ref = useRef();
@@ -46,7 +48,7 @@ function Campaign({ post }) {
 
                     <div className="flex flex-col items-center ">
                         <div className="relative h-[200px] md:h-[320px] md:w-[520px]">
-                            <Image src="/cover.png" layout="fill" />
+                            <Image src={coverPic || defaultPic} layout="fill" />
                         </div>
                     </div>
 
@@ -130,7 +132,7 @@ function Campaign({ post }) {
                                 <div className="grid grid-cols-3 w-1/2">
 
                                     <WhatsappShareButton
-                                        url={`https:/redeemfund.vercel.app/campaign/${slug}`}
+                                        url={`https://redeemfund.vercel.app/campaign/${slug}`}
                                         title={`Support ${post.beneficiary.firstName} ${post.beneficiary.lastName} with a ${post.title}`}
                                         separator=" :: ">
                                         <WhatsAppIcon className="text-whatsapp h-10 w-10" />

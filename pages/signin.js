@@ -76,8 +76,7 @@ function Signin({ csrfToken }) {
           {errorMsg &&  <div className="absolute top-0 right-0 m-4 p-4 bg-red-600 text-white text-sm">{errorMsg}</div>}
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
             <div className="flex flex-col p-4">
-              <button className="flex bg-fbBlue text-white py-3 items-center justify-center rounded-md"
-                onClick={fbSignin}>
+              <button className="flex bg-fbBlue text-white py-3 items-center justify-center rounded-md">
                 <div className="relative h-7 w-7 mr-4">
                   <Image src="/fb.png" layout="fill" />
                 </div>

@@ -31,10 +31,11 @@ function HeaderWithProfile() {
                 <Image src="/logo.png" layout="fill" />
             </div>
 
-            <div className="flex flex-row items-center justify-end space-x-4 md:w-full md:space-y-0 md:mt-0 px-10">
+            <div className="flex flex-row items-center justify-end space-x-4 md:w-full md:space-y-0 md:mt-0 px-10" 
+            onClick={profile}>
             {(profPic)? (
             <div className="relative h-12 w-12">
-            <Image src={profPic} layout="fill" className="rounded-full" />
+            <Image src={profPic} layout="fill" className="rounded-full cursor-pointer" />
             </div>
           ):(
             <PersonIcon className="w-8 h-8" />

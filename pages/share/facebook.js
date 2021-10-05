@@ -39,8 +39,8 @@ function facebook() {
                     <div className="flex flex-row items-center justify-center bg-facebook text-white rounded-md
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-1/2">
                         <FacebookShareButton
-                            url={`https://redeemfund.vercel.app/campaign`}
-                            quote={'Join our mission to help people earn skills and courses as a way to better pursue their passions.⁣'}
+                            url={`https://redeemfund.vercel.app/campaign/${slug}`}
+                            quote={`Support ${post.beneficiary.firstName} ${post.beneficiary.lastName} with a ${post.title}`}
                             hashtag={'#redeemFund'}>
                             <FacebookIcon className="w-10 h-10 mr-2" />
                             Share on facebook

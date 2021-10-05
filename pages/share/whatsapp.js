@@ -40,7 +40,7 @@ function whatsapp() {
                            py-1 px-3 text-sm md:text-base hover:scale-105 transform transition duration-75 ease-out mt-4 md:w-3/4">
                             <WhatsappShareButton
                                 url={`https://redeemfund.vercel.app/campaign/${slug}`}
-                                title={'next-share is a social share buttons for your next React apps.'}
+                                title={`Support ${post.beneficiary.firstName} ${post.beneficiary.lastName} with a ${post.title}`}
                                 separator=":: ">
                                 <WhatsAppIcon className="w-10 h-10 mr-2" />
                                 Share through whatsapp

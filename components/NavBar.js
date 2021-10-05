@@ -73,14 +73,15 @@ function NavBar() {
 
       <div className={`${active ? 'flex flex-col space-y-2 w-40 mt-2' : 'hidden'
         }  md:flex md:flex-row md:items-center md:justify-end md:space-x-5 md:w-full md:space-y-0 md:mt-0`}>
+         
         <button className="bg-green-600 rounded-md p-2 text-sm hover:scale-105 transform transition duration-75 ease-out"
           onClick={startCampaign}>
           Start a campaign
         </button>
-        <div className="relative flex flex-row items-center space-x-3">
+        <div className="relative flex flex-row items-center space-x-3" onClick={profile}>
           {(profPic)? (
             <div className="relative h-8 w-8">
-            <Image src={profPic} layout="fill" className="rounded-full" />
+            <Image src={profPic} layout="fill" className="rounded-full cursor-pointer" />
             </div>
           ):(
             <PersonIcon className="w-8 h-8" />
