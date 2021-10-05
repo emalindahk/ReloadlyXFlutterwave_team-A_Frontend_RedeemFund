@@ -7,7 +7,7 @@ import { FormContext } from '../../context'
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { TwitterShareButton } from 'next-share'
 
-function twitter() {
+function twitter({post}) {
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
     const slug = campaignData.slug
@@ -52,3 +52,28 @@ function twitter() {
 }
 
 export default twitter
+
+export async function getStaticPaths() {
+    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
+    const campaign = await res.json();
+    const paths = campaign.map((item) => ({
+        params: { slug: item.slug },
+    }));
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const { slug } = params;
+
+    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
+    const data = await res.json();
+    const post = data[0]
+
+    return {
+        props: { post },
+    };
+}

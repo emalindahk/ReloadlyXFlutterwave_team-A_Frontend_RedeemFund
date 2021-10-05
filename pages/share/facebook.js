@@ -8,7 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { FacebookShareButton } from 'next-share';
 
 
-function facebook() {
+function facebook({post}) {
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
     const slug = campaignData.slug
@@ -57,3 +57,28 @@ function facebook() {
 }
 
 export default facebook
+
+export async function getStaticPaths() {
+    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
+    const campaign = await res.json();
+    const paths = campaign.map((item) => ({
+        params: { slug: item.slug },
+    }));
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const { slug } = params;
+
+    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
+    const data = await res.json();
+    const post = data[0]
+
+    return {
+        props: { post },
+    };
+}

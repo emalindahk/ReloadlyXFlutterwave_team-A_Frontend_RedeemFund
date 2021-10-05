@@ -6,7 +6,7 @@ import { FormContext } from '../../context'
 import { useRouter } from 'next/dist/client/router'
 import { FacebookMessengerShareButton } from 'next-share'
 
-function messenger() {
+function messenger({post}) {
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
     const slug = campaignData.slug
@@ -53,3 +53,28 @@ function messenger() {
 }
 
 export default messenger
+
+export async function getStaticPaths() {
+    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
+    const campaign = await res.json();
+    const paths = campaign.map((item) => ({
+        params: { slug: item.slug },
+    }));
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const { slug } = params;
+
+    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
+    const data = await res.json();
+    const post = data[0]
+
+    return {
+        props: { post },
+    };
+}

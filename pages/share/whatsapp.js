@@ -9,7 +9,7 @@ import { FormContext } from '../../context'
 
 
 
-function whatsapp() {
+function whatsapp({post}) {
 
     const router = useRouter()
     const { campaignData } = useContext(FormContext)
@@ -57,3 +57,28 @@ function whatsapp() {
 }
 
 export default whatsapp
+
+export async function getStaticPaths() {
+    const res = await fetch(`${process.env.BASE_API_URL}campaigns`);
+    const campaign = await res.json();
+    const paths = campaign.map((item) => ({
+        params: { slug: item.slug },
+    }));
+
+    return {
+        paths,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    const { slug } = params;
+
+    const res = await fetch(`${process.env.BASE_API_URL}campaign/${slug}`);
+    const data = await res.json();
+    const post = data[0]
+
+    return {
+        props: { post },
+    };
+}
