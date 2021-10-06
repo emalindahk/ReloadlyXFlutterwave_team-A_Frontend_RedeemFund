@@ -43,7 +43,7 @@ function Signin({ csrfToken }) {
       setErrorMsg(res.error)
      } else {   
       setSuccessMsg('You have successfully signed in!')
-      router.push('/profile')
+      router.push('/')
      }
 
   };
