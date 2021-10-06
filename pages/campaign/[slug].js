@@ -153,7 +153,7 @@ function Campaign({ post }) {
                                 </div>
                             </div>
 
-                            <ClipboardCopy copyText={`https://redeemfund.vercel.app/campaign/$slug`} />
+                            <ClipboardCopy copyText={`https://redeemfund.vercel.app/campaign/${slug}`} />
                         </div>
                     </div>
 
