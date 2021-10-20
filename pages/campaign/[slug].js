@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import LinearProgress from '@mui/material/LinearProgress';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
@@ -17,6 +18,7 @@ import ClipboardCopy from '../../components/ClipboardCopy';
 
 function Campaign({ post }) {
 
+    const router = useRouter();
     const [open, setOpen] = useState(false)
     const slug = post.slug
     const coverPic = post.coverPictureS3
@@ -33,6 +35,12 @@ function Campaign({ post }) {
     const prevOpen = usePrevious(open)
     const handleSupport = _ => {
         setOpen(!prevOpen)
+    }
+
+    if (router.isFallback) {
+        return <Layout>
+            loading...
+        </Layout>
     }
 
 
@@ -175,7 +183,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     };
 }
 
