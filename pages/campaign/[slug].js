@@ -175,7 +175,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     };
 }
 
@@ -188,5 +188,6 @@ export async function getStaticProps({ params }) {
 
     return {
         props: { post },
+        revalidate: 60 * 60,
     };
 }
