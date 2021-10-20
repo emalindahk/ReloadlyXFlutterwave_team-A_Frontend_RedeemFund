@@ -9,6 +9,7 @@ module.exports = {
     },
     env: {
       BASE_API_URL: process.env.BASE_API_URL,
+      AIRTABLE_API_KEY : process.env.AIRTABLE_API_KEY,
     },
   };
   
