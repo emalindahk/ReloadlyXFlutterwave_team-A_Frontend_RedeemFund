@@ -10,10 +10,5 @@ module.exports = {
     env: {
       BASE_API_URL: process.env.BASE_API_URL,
     },
-    exportPathMap: async function ( ) {
-      return {
-        '/campaign/slug': { page: '/campaign/[slug]' }
-      }
-    },
   };
   
